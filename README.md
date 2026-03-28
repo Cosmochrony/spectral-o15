@@ -26,30 +26,30 @@ to the exact Weil-block observable measured in O12–O14.
 # Core Result
 
 The paper establishes that the structural relation
-\[
+$
 \beta^* = \frac{1}{\delta + \tfrac12}
-\]
+$
 derived in **O6–O7** is **valid only for a scalar global observable** and
 does **not transfer automatically** to the exact-block setting.
 
 The main logical result is a **non-transferability theorem**:
 
 - the exponent
-  \[
+  $
   \hat\delta_{\mathrm{exact}}
-  \]
+  $
   extracted from the block mean
-  \[
+  $
   \bar\Sigma_n = \frac{1}{q-1}\sum_c \Sigma_n^{(c)}
-  \]
+  $
   is **not**, in general, the exponent controlling the dynamic growth law of \(p(n)\)
 
 Thus the O7 chain
-\[
+$
 \bar\Sigma_n \sim p(n)^{-\delta}
 \quad \Longrightarrow \quad
 \beta^* = \frac{1}{\delta + \tfrac12}
-\]
+$
 fails in the exact Weil regime.
 
 ---
@@ -78,9 +78,9 @@ So the issue is not a mathematical error in O3–O7, but a **domain-of-validity 
 ## 2. Non-equivalence of observables
 
 The paper proves that the exact observable
-\[
+$
 \bar\Sigma_n = \frac{1}{q-1}\sum_c \Sigma_n^{(c)}
-\]
+$
 cannot be identified with the scalar redundancy observable entering the O6 growth law.
 
 This establishes that:
@@ -93,17 +93,17 @@ A new formal no-go result shows that **no choice of non-negative dynamic weights
 on the blocks can produce a dynamic exponent larger than the measured exact exponent.
 
 If
-\[
+$
 \hat\delta_{\mathrm{exact}} < 5.0,
-\]
+$
 then any block-weighted aggregation still satisfies
-\[
+$
 \alpha_{\mathrm{dyn}} \le \hat\delta_{\mathrm{exact}} < 5.0,
-\]
+$
 which is far below the target range
-\[
+$
 \delta \in [7.4, 10.6].
-\]
+$
 
 This eliminates the entire class of explanations based on:
 - better averaging
@@ -256,29 +256,29 @@ So O15 transforms S2 from a broad tension into a concrete programme.
 The remaining open problem is now sharply defined:
 
 - what is the correct exact-block observable
-  \[
+  $
   R_n^{\mathrm{eff}}
-  \]
+  $
   entering the growth equation for \(p(n)\)?
 
 Two scenarios remain:
 
 ## C1 — Conservative recast
 A corrected dynamic observable yields a modified exponent
-\[
+$
 \delta_{\mathrm{eff}},
-\]
+$
 but the functional form
-\[
+$
 \beta^* = \frac{1}{\delta_{\mathrm{eff}} + \tfrac12}
-\]
+$
 survives.
 
 ## C2 — Structural revision
 The exact Weil-block regime requires a further correction
-\[
+$
 \sigma(q),
-\]
+$
 so that the O7 map itself must be structurally revised.
 
 O15 does not decide between C1 and C2,
