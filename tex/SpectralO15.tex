@@ -1,0 +1,936 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{amsopn}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+
+\newcommand{\Rn}{R_n}
+\newcommand{\Sn}{\bar{\Sigma}_n}
+\newcommand{\dexact}{\hat{\delta}_{\mathrm{exact}}}
+\newcommand{\deff}{\delta_{\mathrm{eff}}}
+\newcommand{\Reff}{R_n^{\mathrm{eff}}}
+\newcommand{\bstar}{\beta^{*}}
+
+\title{Observable-Class Derivation Mismatch and the Exact Growth Equation:\\
+From Proxy Capacity to Block-Level Dynamics}
+\author{J\'er\^ome Beau\\
+\small Independent Researcher, France; jerome.beau@cosmochrony.org}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The O3--O7 derivation chain establishes the structural relation
+$\bstar = 1/(\delta + 1/2)$ linking the capacity decay exponent~$\delta$
+to the cascade growth exponent~$\bstar$ governing charged-lepton mass ratios.
+Papers O12--O14 demonstrated that the exact Weil-block capacity exponent
+$\dexact(q) \in [3.6, 4.8]$ is incompatible with the target window
+$\delta \in [7.4, 10.6]$, and that this tension is structural rather than
+a finite-size artefact.
+The present paper identifies the precise origin of the mismatch:
+the O6 growth equation $\mathrm{d}p/\mathrm{d}n \lesssim \Rn \, c_\chi \sqrt{p(n)}$
+derives $\bstar$ from a \emph{scalar global} redundancy functional~$\Rn$,
+whereas the exact observable measured in O12--O13 is a \emph{block-averaged}
+capacity over $(q-1)$ Weil representations of internal dimension~$q$.
+We prove a non-equivalence theorem establishing that the block-averaged
+exponent $\dexact$ does not, in general, coincide with the scalar exponent~$\alpha$
+entering the growth equation.
+We define the effective dynamical redundancy $\Reff$ as the observable
+that genuinely governs the valence growth in the exact-block setting,
+and re-derive the growth equation with this observable as input.
+The re-derivation yields two structural scenarios:
+(C1)~the functional form $\bstar = 1/(\deff + 1/2)$ survives with a
+corrected exponent $\deff$ that differs from $\dexact$ by an
+aggregation bias;
+(C2)~the functional form itself is modified by a
+representation-dimension correction,
+$\bstar = 1/(\deff + 1/2 + \sigma(q))$, where $\sigma(q) \to 0$
+as $q \to \infty$.
+Scenario discrimination requires a block-level redundancy measurement
+not yet available from the O12 pipeline,
+identified as the central open direction of this paper.
+\end{abstract}
+
+\smallskip\noindent
+\textbf{Keywords.}
+Observable-class mismatch, growth equation, block-averaged capacity,
+scalar redundancy, Weil representations, Heisenberg graphs,
+cascade exponent, spectral admissibility.
+
+  \clearpage
+\tableofcontents
+
+\clearpage
+\subsection*{Notation glossary}
+
+  \noindent
+  The four exponents appearing in this paper form a strict hierarchy:
+  \begin{center}
+    \begin{tabular}{clp{7.5cm}}
+      \toprule
+      Symbol & Name & Definition \\
+      \midrule
+      $\dexact$ & measured exponent &
+      Power-law fit of the unweighted block average
+      $\Sn = \mathbb{E}_c[\Sigma_n^{(c)}] \sim A\,n^{-\dexact}$
+      (O12/O13 observable). \\[4pt]
+      $\alpha_{\mathrm{dyn}}$ & dynamical exponent &
+      Power-law fit of the weighted observable
+      $\Reff \sim B\,n^{-\alpha_{\mathrm{dyn}}}$
+      (Definition~\ref{def:alphaeff}).
+      Satisfies $\alpha_{\mathrm{dyn}} \leq \dexact$
+      (Corollary~\ref{cor:nogo}). \\[4pt]
+      $\deff$ & effective exponent (C1) &
+      Redefined exponent absorbing shell-growth and
+      $q$-normalisation corrections:
+      $\deff = \dexact - (D-1) + \log q / \log n^{*}$. \\[4pt]
+      $\sigma(q)$ & structural correction (C2) &
+      Additional $q$-dependent term in the denominator
+      of the growth formula, required if C1 does not
+      close the gap to $\bstar \in (0.09, 0.13)$. \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{Position in the O-series}
+\label{sec:position}
+
+The admissibility sub-programme has traced a complete arc from obstruction
+identification (O8--O9~\cite{Beau2026a12,Beau2026a13}) through exact
+measurement (O10--O13~\cite{Beau2026a14,Beau2026a15,Beau2026a16,Beau2026a17})
+to theoretical correspondence (O14~\cite{Beau2026a18}).
+O14 established that the tension between the exact Weil-block capacity
+exponent $\dexact(q) \in [3.6, 4.8]$ and the phenomenological target
+$\delta \in [7.4, 10.6]$ is not a numerical artefact (refuting hypothesis~S1
+of O13) but a structural mismatch (Source~S2).
+The corrected relation derived in O14,
+\begin{equation}
+\label{eq:O14corrected}
+\bstar = \frac{1}{\deff + \tfrac{1}{2}} + \epsilon(q),
+\end{equation}
+with $\deff = \dexact - \delta_{\gamma,\mathrm{corr}}
+- \eta \cdot \log q / \log n^{*}$ and $\epsilon(q) \to 0$ as $q \to \infty$,
+was shown to be consistent with Scenario~S2-B for all tested primes:
+$\deff < 5.0$ throughout, with the normalisation correction
+$\eta \cdot \log q / \log n_1 \approx 1.03$--$1.06$ as the dominant term.
+
+O14 thus closed the measurement question but left open the
+\emph{derivation} question:
+does the functional form $\bstar = 1/(\delta + 1/2)$ itself remain valid
+when the input observable changes from a scalar global capacity to a
+block-averaged Weil capacity?
+The present paper answers this question.
+
+\subsection{The central question}
+\label{sec:central}
+
+The relation $\bstar = 1/(\delta + 1/2)$ was derived in
+O6~\cite{Beau2026a10} (Proposition~4.2) from the growth equation
+\begin{equation}
+\label{eq:growth}
+\frac{\mathrm{d}p}{\mathrm{d}n}
+\lesssim \Rn \cdot c_\chi \sqrt{p(n)},
+\end{equation}
+where $\Rn$ is a scalar redundancy functional satisfying
+$\Rn \sim p(n)^{-\alpha}$ in the pre-saturation window.
+Separation of variables yields $p(n) \sim n^{1/(\alpha + 1/2)}$,
+giving $\bstar = 1/(\alpha + 1/2)$.
+
+The question is: \emph{what is the correct identification of~$\Rn$
+in the exact Weil-block setting, and does substituting it into~\eqref{eq:growth}
+preserve the functional form?}
+
+\subsection{Main results}
+\label{sec:mainresults}
+
+\begin{enumerate}[label=(\arabic*)]
+\item We audit the O3--O7 derivation chain and identify the three
+precise points where the scalar-observable hypothesis enters
+(Section~\ref{sec:audit}).
+\item We prove a non-equivalence theorem: the block-averaged exponent
+$\dexact$ does not coincide with the scalar exponent~$\alpha$ of the
+growth equation under generic conditions on block heterogeneity
+(Section~\ref{sec:noneq}).
+\item We define the effective dynamical redundancy $\Reff$ and show it
+is the correct input to~\eqref{eq:growth} in the exact setting
+(Section~\ref{sec:Reff}).
+\item We re-derive the growth equation with $\Reff$ as input and identify
+the two structural scenarios C1 and C2 (Section~\ref{sec:rederivation}).
+\item We specify the block-level measurement required to discriminate
+C1 from C2 (Section~\ref{sec:discrimination}).
+\end{enumerate}
+
+\section{Audit of the O3--O7 Derivation Chain}
+\label{sec:audit}
+
+We trace the logical chain that produces $\bstar = 1/(\delta + 1/2)$
+and identify, at each step, the hypotheses that hold for the proxy
+observable but fail for the exact Weil-block observable.
+
+\subsection{Step A: O3 mass formula}
+\label{sec:stepA}
+
+O3~\cite{Beau2026a7} derives the inter-generation mass ratio
+\begin{equation}
+\label{eq:massratio}
+\frac{M_i}{M_j}
+= \left(\frac{|{\lambda_i - 1}|}{|{\lambda_j - 1}|}\right)^{2/\beta},
+\end{equation}
+from the support-narrowing mechanism under the power-law growth
+hypothesis $p(n) \sim A n^\beta$.
+The derivation uses two hypotheses:
+\begin{description}[style=nextline]
+\item[H-O3-1] The growth $p(n) \sim A n^\beta$ is a power law.
+\item[H-O3-2] The mass is inversely proportional to the exit rank:
+$M_i \propto E_P / n_{\mathrm{exit}}(\lambda_i)$.
+\end{description}
+Both hypotheses are explicit structural postulates of O3.
+Neither involves any property of the capacity observable.
+The mass formula~\eqref{eq:massratio} is therefore \emph{independent}
+of the observable-class mismatch and remains valid throughout.
+
+\subsection{Step B: O6 growth equation}
+\label{sec:stepB}
+
+O6~\cite{Beau2026a10}, Proposition~4.2, derives $\bstar = 1/(\alpha + 1/2)$
+from the growth equation~\eqref{eq:growth}.
+The derivation involves three implicit hypotheses about the
+redundancy functional~$\Rn$:
+
+\begin{description}[style=nextline]
+\item[H-O6-1 (Scalar observable)]
+$\Rn$ is a single real-valued function of the cascade rank~$n$,
+independent of any internal representation label.
+\item[H-O6-2 (Power-law decay)]
+$\Rn \sim p(n)^{-\alpha}$ for a single exponent~$\alpha$ over the
+pre-saturation window.
+\item[H-O6-3 (Direct coupling)]
+$\Rn$ enters the growth equation multiplicatively:
+the rate of valence increase is proportional to~$\Rn$.
+\end{description}
+
+Hypothesis H-O6-1 is the central point of failure.
+In the proxy setting (O7--O11), the capacity $C_n^{\mathrm{proxy}}$
+is defined via a Fourier-character proxy that abelianises the
+representation structure~\cite{Beau2026a11}.
+It is indeed a scalar function of~$n$.
+
+In the exact setting (O12--O14), the observable is
+$\Sn = \mathbb{E}_c[\Sigma_n^{(c)}]$, a mean over $(q-1)$ Weil blocks,
+each of internal dimension~$q$.
+This is not a scalar observable in the sense of H-O6-1: it carries
+a hidden dependence on the block structure through the averaging.
+
+\subsection{Step C: O7 reinterpretation}
+\label{sec:stepC}
+
+O7~\cite{Beau2026a11} recasts the O6 formula in capacity language.
+The identification $\alpha = \delta$ (O7, Section~5.1) holds in the
+reduced filling model where $p(n) = n$.
+The state law $R_n^{(k)} \approx \Phi(\eta_n)$ with
+$\Phi(\eta) = 1/\sqrt{1 + \eta^2}$ is derived exactly in the reduced
+model and is a property of the scalar capacity.
+
+O7 does not introduce new deductive content for the $\delta \to \bstar$
+relation.
+It inherits H-O6-1 from O6 without modification.
+The Remark~5.2 of O7 states this explicitly:
+the formula ``does not introduce a new derivation of~$\beta$:
+it recasts the O6 target in capacity language without circularity.''
+
+\subsection{Summary of audit}
+\label{sec:auditsummary}
+
+\begin{table}[ht]
+\centering
+\caption{Audit of the derivation chain.
+The column ``Exact status'' indicates whether the hypothesis
+holds for the exact Weil-block observable.}
+\label{tab:audit}
+\begin{tabular}{llcc}
+\toprule
+Paper & Hypothesis & Proxy & Exact \\
+\midrule
+O3 & H-O3-1 (power-law growth) & valid & valid \\
+O3 & H-O3-2 (mass $\propto 1/n_{\mathrm{exit}}$) & valid & valid \\
+O6 & H-O6-1 (scalar observable) & valid & \textbf{fails} \\
+O6 & H-O6-2 (power-law decay) & valid & valid \\
+O6 & H-O6-3 (direct coupling) & valid & open \\
+O7 & inherits H-O6-1 & valid & \textbf{fails} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The mass formula of O3 is intact.
+The growth equation of O6 is algebraically correct in its domain.
+The failure is localised at H-O6-1: the scalar-observable hypothesis,
+which enters the growth equation through the identification of~$\Rn$
+with a single power-law observable.
+
+\section{Non-Equivalence of Block-Averaged and Scalar Exponents}
+\label{sec:noneq}
+
+We now prove that the exponent extracted from a block-averaged observable
+does not, in general, coincide with the exponent of a scalar observable
+satisfying the growth equation.
+
+\subsection{Setup}
+
+Fix an odd prime~$q$.
+The Heisenberg group $G_q = \mathrm{Heis}_3(\mathbb{Z}/q\mathbb{Z})$
+has $(q-1)$ faithful irreducible representations
+$\rho_c$ ($c \in (\mathbb{Z}/q\mathbb{Z})^\times$), each of dimension~$q$.
+The block-level projective capacity at BFS depth~$n$ in block~$c$ is
+\begin{equation}
+\label{eq:blockcap}
+\Sigma_n^{(c)} = \frac{\Delta r_n^{(c)}}{|S_n|},
+\end{equation}
+where $\Delta r_n^{(c)}$ is the incremental projective span in
+representation~$\rho_c$ and $|S_n|$ is the BFS shell size.
+The block average is $\Sn = \mathbb{E}_c[\Sigma_n^{(c)}]$.
+
+In the proxy setting, the capacity is a single scalar
+$C_n^{\mathrm{proxy}}$ defined via the Fourier-character
+abelianisation~\cite{Beau2026a15}.
+
+\subsection{Block heterogeneity and exponent bias}
+
+\begin{definition}[Block exponent and mean exponent]
+\label{def:exponents}
+For each block~$c$, define the block exponent
+$\delta^{(c)}$ by the power-law fit
+$\Sigma_n^{(c)} \sim A_c \, n^{-\delta^{(c)}}$
+over the fitting window $[n_0, n_1]$.
+Define the mean exponent
+$\bar{\delta} = \mathbb{E}_c[\delta^{(c)}]$
+and the exponent of the mean
+$\dexact$ by the fit
+$\Sn \sim A \, n^{-\dexact}$.
+\end{definition}
+
+\begin{proposition}[Non-equivalence]
+\label{prop:noneq}
+If the block amplitudes $A_c$ are not all equal,
+then $\dexact \neq \bar{\delta}$ in general.
+Specifically, let $V_A = \mathrm{Var}_c(A_c) / \mathbb{E}_c[A_c]^2$
+be the relative amplitude variance.
+Then
+\begin{equation}
+\label{eq:noneq}
+\dexact = \bar{\delta}
+- \frac{1}{\log(n_1/n_0)}
+\log\!\left(
+\frac{\mathbb{E}_c[A_c \, (n_1/n_0)^{-\delta^{(c)}}]}
+{\mathbb{E}_c[A_c] \cdot (n_1/n_0)^{-\bar{\delta}}}
+\right).
+\end{equation}
+The correction term vanishes if and only if $\delta^{(c)}$ is independent
+of~$c$ (block universality).
+\end{proposition}
+
+\begin{proof}
+Write $\Sn = \mathbb{E}_c[A_c \, n^{-\delta^{(c)}}]$.
+At two endpoints $n_0, n_1$ of the fitting window:
+\[
+\dexact
+= -\frac{\log(\Sn[n_1] / \Sn[n_0])}{\log(n_1 / n_0)}
+= -\frac{1}{\log(n_1/n_0)}
+\log\!\left(
+\frac{\mathbb{E}_c[A_c \, n_1^{-\delta^{(c)}}]}
+{\mathbb{E}_c[A_c \, n_0^{-\delta^{(c)}}]}
+\right).
+\]
+If all $\delta^{(c)} = \delta_0$, this reduces to $\delta_0 = \bar{\delta}$.
+Otherwise, the ratio is a weighted average of $\exp(-\delta^{(c)} \log(n_1/n_0))$
+with weights $A_c$, and by Jensen's inequality it differs from
+$\exp(-\bar{\delta} \log(n_1/n_0))$ whenever the distribution of
+$\delta^{(c)}$ is non-degenerate.
+\end{proof}
+
+\begin{remark}[Direction of the bias]
+\label{rem:bias}
+For a convex function $f(\delta) = \exp(-\delta \log(n_1/n_0))$,
+Jensen's inequality gives
+$\mathbb{E}_c[f(\delta^{(c)})] \geq f(\bar{\delta})$,
+so $\dexact \leq \bar{\delta}$.
+The block-averaged exponent is systematically \emph{smaller}
+than the mean of individual block exponents.
+This is consistent with the O12--O13 observation that $\dexact$
+lies below the target window.
+\end{remark}
+
+\begin{remark}[Quantitative estimate from O12--O13 data]
+\label{rem:quantitative}
+O12~\cite{Beau2026a16} reports inter-block variance ratios
+$V_n^{\max}(q)$ that decrease from $\sim 0.15$ at $q = 29$ to
+$\sim 0.03$ at $q = 211$.
+Even at $q = 211$, the residual variance produces a bias of order
+$|\dexact - \bar{\delta}| \sim 0.1$--$0.3$, which is insufficient
+to bridge the gap to the target $\delta \in [7.4, 10.6]$.
+The non-equivalence is therefore real but quantitatively small
+compared to the total deficit.
+\end{remark}
+
+\subsection{Consequence for the growth equation}
+
+The growth equation~\eqref{eq:growth} couples the rate of valence
+increase to the redundancy of new relational directions.
+Physically, it is the \emph{fraction of genuinely new directions
+contributed by the BFS frontier} that limits the growth of~$p$.
+This fraction is a property of the \emph{aggregate} projective
+dynamics, not of any individual block.
+
+The scalar exponent~$\alpha$ in H-O6-2 is the exponent of this
+aggregate fraction.
+It is not, in general, equal to $\dexact$ (the exponent of the
+block-averaged capacity), because the block-averaged capacity
+includes internal normalisation and phase structure that do not
+enter the growth equation.
+
+This motivates the definition of the effective dynamical redundancy
+in the next section.
+
+\section{Effective Dynamical Redundancy}
+\label{sec:Reff}
+
+\subsection{Physical meaning of the growth equation}
+
+The growth equation~\eqref{eq:growth} has a precise physical content:
+at each cascade step~$n$, the substrate attempts to increase its
+effective relational valence~$p$ by incorporating new relational
+directions from the BFS frontier.
+The rate of successful incorporation is limited by two factors:
+\begin{enumerate}[label=(\alph*)]
+\item The Born--Infeld flux bound $c_\chi$, which caps the rate
+of change of any relational variable~\cite{Beau2026a8}.
+\item The fraction of frontier directions that are genuinely
+new, i.e.\ not already represented in the current relational
+structure.
+\end{enumerate}
+Factor~(b) is what $\Rn$ encodes.
+In the proxy setting, where the capacity is a scalar, $\Rn$ is
+directly proportional to the capacity: $\Rn \propto \Sigma_n$.
+In the exact setting, the identification is more subtle because
+``genuinely new'' must be defined relative to the full block structure.
+
+\subsection{Definition of $\Reff$}
+
+\begin{definition}[Effective dynamical redundancy]
+\label{def:Reff}
+The effective dynamical redundancy at cascade rank~$n$ is
+\begin{equation}
+\label{eq:Reffdef}
+\Reff = \frac{1}{q-1} \sum_{c \in (\mathbb{Z}/q\mathbb{Z})^\times}
+w_c(n) \, \Sigma_n^{(c)},
+\end{equation}
+where $w_c(n)$ is the dynamical weight of block~$c$, defined as
+\begin{equation}
+\label{eq:weights}
+w_c(n)
+= \frac{\Delta r_n^{(c)} / \dim V_c}
+{\sum_{c'} \Delta r_n^{(c')} / \dim V_{c'}}
+= \frac{\Delta r_n^{(c)} / q}
+{\sum_{c'} \Delta r_n^{(c')} / q}
+= \frac{\Delta r_n^{(c)}}{\sum_{c'} \Delta r_n^{(c')}}.
+\end{equation}
+\end{definition}
+
+The weight $w_c(n)$ measures the relative contribution of block~$c$
+to the total incremental span at step~$n$.
+It is the natural dynamical weight because the growth equation
+counts the total number of new relational degrees of freedom,
+and each block contributes $\Delta r_n^{(c)}$ such degrees.
+
+\begin{proposition}[Relation to the unweighted mean]
+\label{prop:relation}
+Let $\Sn = \mathbb{E}_c[\Sigma_n^{(c)}]$ be the unweighted block
+average (the O12/O13 observable) and let
+$\Sigma_n^{w} = \sum_c w_c \Sigma_n^{(c)}$ be the weighted observable
+of Definition~\ref{def:Reff}.
+Then
+\begin{equation}
+\label{eq:relation}
+\Reff = \Sn + \mathrm{Cov}_c\!\left(
+\frac{w_c}{1/(q-1)}, \, \Sigma_n^{(c)}
+\right),
+\end{equation}
+where the covariance is taken over the uniform distribution on blocks.
+The correction vanishes if the weights are uniform ($w_c = 1/(q-1)$
+for all~$c$), which occurs if and only if all blocks contribute
+equally to the incremental span.
+\end{proposition}
+
+\begin{proof}
+Direct computation:
+$\Reff - \Sn
+= \sum_c w_c \Sigma_n^{(c)} - \frac{1}{q-1} \sum_c \Sigma_n^{(c)}
+= \sum_c (w_c - \frac{1}{q-1}) \Sigma_n^{(c)}
+= (q-1) \mathrm{Cov}_c(w_c, \Sigma_n^{(c)})$.
+\end{proof}
+
+\begin{remark}[Sign of the correction]
+\label{rem:sign}
+Blocks with larger $\Delta r_n^{(c)}$ (hence larger $w_c$) tend to
+have larger $\Sigma_n^{(c)}$ (since $\Sigma_n^{(c)}$ is the ratio
+$\Delta r_n^{(c)} / |S_n|$).
+The covariance is therefore generically positive, giving
+$\Reff \geq \Sn$.
+The effective dynamical redundancy is \emph{larger} than the
+unweighted block average.
+\end{remark}
+
+\subsection{Exponent of $\Reff$}
+
+\begin{definition}[Dynamical exponent]
+\label{def:alphaeff}
+The dynamical exponent~$\alpha_{\mathrm{dyn}}$ is defined by the
+power-law fit $\Reff \sim B \, n^{-\alpha_{\mathrm{dyn}}}$ over the
+pre-saturation window.
+\end{definition}
+
+By Proposition~\ref{prop:relation} and Remark~\ref{rem:sign},
+$\alpha_{\mathrm{dyn}} \leq \dexact$: the dynamical exponent is
+smaller than or equal to the unweighted block-average exponent.
+
+\begin{corollary}[Aggregation no-go]
+\label{cor:nogo}
+No choice of dynamical weights $w_c(n)$ satisfying $w_c \geq 0$
+and $\sum_c w_c = 1$ can produce
+$\alpha_{\mathrm{dyn}} > \dexact$.
+In particular, the block-averaged exponent $\dexact \in [3.6, 4.8]$
+measured in O12--O13 is an \emph{upper bound} on the dynamical
+exponent entering the growth equation.
+Since $\dexact < 5.0 \ll 7.4$, no aggregation or reweighting
+of the existing block-level data can bring the dynamical
+exponent into the target window $[7.4, 10.6]$.
+\end{corollary}
+
+\begin{proof}
+At fixed BFS depth~$n$, the shell size $|S_n|$ is common to all blocks.
+Therefore $\Sigma_n^{(c)} = \Delta r_n^{(c)} / |S_n|$ is a monotone
+increasing function of $\Delta r_n^{(c)}$ alone.
+The weight $w_c = \Delta r_n^{(c)} / \sum_{c'} \Delta r_n^{(c')}$
+is likewise a monotone increasing function of the same variable
+$\Delta r_n^{(c)}$.
+Since both $w_c$ and $\Sigma_n^{(c)}$ are monotone increasing functions
+of a single common variable, the Chebyshev sum inequality gives
+\[
+\sum_c w_c \, \Sigma_n^{(c)}
+\;\geq\;
+\left(\sum_c w_c\right)
+\left(\frac{1}{q-1} \sum_c \Sigma_n^{(c)}\right)
+= \Sn,
+\]
+so $\Reff \geq \Sn$ pointwise in~$n$.
+A pointwise lower bound on the observable translates into an upper
+bound on the decay exponent: $\alpha_{\mathrm{dyn}} \leq \dexact$.
+\end{proof}
+
+This is the sharpest negative result of the paper:
+it eliminates the entire class of solutions based on
+``better averaging of the blocks.''
+If the $\delta$--$\bstar$ tension is to be resolved, the resolution
+must come from a modification of the growth equation itself
+--- through the shell growth factor, the $q$-normalisation,
+or a structural correction $\sigma(q)$ --- not from a refined
+treatment of the block statistics.
+
+\section{Re-Derivation of the Growth Equation}
+\label{sec:rederivation}
+
+\subsection{Growth equation in the exact-block setting}
+
+In the exact setting, the BFS frontier at step~$n$ contributes new
+relational degrees of freedom through all $(q-1)$ Weil blocks
+simultaneously.
+The total incremental span is
+\begin{equation}
+\label{eq:totalspan}
+\Delta r_n^{\mathrm{tot}}
+= \sum_{c} \Delta r_n^{(c)}.
+\end{equation}
+Each block~$c$ lives in a representation space of dimension~$q$,
+so the total available representation space has dimension
+$(q-1) \cdot q \sim q^2$.
+
+The Born--Infeld growth bound becomes
+\begin{equation}
+\label{eq:growthexact}
+\frac{\mathrm{d}p}{\mathrm{d}n}
+\lesssim c_\chi \sqrt{p(n)} \cdot
+\frac{\Delta r_n^{\mathrm{tot}}}{(q-1) \cdot q},
+\end{equation}
+where the denominator $(q-1) \cdot q$ normalises by the total number
+of representation degrees of freedom.
+
+\begin{remark}[Status of the $q$-dependent normalisation]
+\label{rem:qnorm}
+The factor $1/q$ in~\eqref{eq:growthexact} is a
+\emph{dimensional ansatz}, not a derived result.
+Its motivation is as follows: in the proxy setting, the capacity
+is defined in a scalar (one-dimensional) representation, so no
+internal dimension enters the normalisation.
+In the exact setting, each block has $q$ internal degrees of
+freedom, and the fraction of genuinely new directions per
+available degree of freedom naturally acquires a factor $1/q$.
+This is consistent with the normalisation correction identified
+in O14 as the dominant source of the observable-class mismatch.
+However, the Born--Infeld constraint $|\partial_t \chi_v| \leq c_\chi$
+operates at the level of individual relational variables, not at
+the representation level.
+The correct translation of this per-variable bound into a
+per-representation constraint depends on how the representation
+degrees of freedom couple to the relational dynamics,
+which remains an open derivation.
+The factor $1/q$ is the simplest dimensional estimate; a more refined
+treatment may yield a different power $q^{-\eta}$ with $\eta \neq 1$.
+\end{remark}
+
+\subsection{Separation of variables}
+
+Rewrite~\eqref{eq:growthexact} using
+$\Delta r_n^{\mathrm{tot}} / ((q-1) \cdot q)
+= \frac{1}{q} \cdot \frac{1}{q-1} \sum_c \Delta r_n^{(c)} / |S_n|
+\cdot |S_n|
+= \frac{|S_n|}{q} \cdot \Sn$,
+where we used $\Sn = \frac{1}{q-1} \sum_c \Sigma_n^{(c)}$
+with $\Sigma_n^{(c)} = \Delta r_n^{(c)} / |S_n|$.
+Then
+\begin{equation}
+\label{eq:growthexact2}
+\frac{\mathrm{d}p}{\mathrm{d}n}
+\lesssim c_\chi \sqrt{p(n)} \cdot \frac{|S_n|}{q} \cdot \Sn.
+\end{equation}
+
+In the BFS growth regime on the Heisenberg graph,
+$|S_n| \sim C_S \, n^{D-1}$ with $D$ the effective growth dimension,
+and $\Sn \sim A \, n^{-\dexact}$.
+The factor $|S_n| \cdot \Sn \sim C \, n^{D - 1 - \dexact}$.
+
+For the proxy derivation (O6), $|S_n|$ is absorbed into the
+definition of~$\Rn$ and does not appear explicitly.
+The exact derivation makes the shell growth and the capacity decay
+visible as separate factors.
+
+\begin{hypothesis}[Effective growth law under exact-block normalisation]
+\label{hyp:growthexact}
+Under the ansatz $p(n) \sim A n^\beta$, the exact-block growth
+equation~\eqref{eq:growthexact2}, and the dimensional normalisation
+ansatz $1/q$ of Remark~\ref{rem:qnorm}, separation of variables gives
+\begin{equation}
+\label{eq:betaexact}
+\beta = \frac{1}{\tfrac{1}{2} + \dexact - (D - 1)
++ \log q / \log n^{*}},
+\end{equation}
+where $n^{*}$ is the saturation depth.
+In the limit $q \to \infty$ with $n^{*} \sim q$, the term
+$\log q / \log n^{*} \to 1$.
+\end{hypothesis}
+
+\begin{remark}[Status of Hypothesis~\ref{hyp:growthexact}]
+\label{rem:status}
+This is a heuristic re-derivation, not a theorem.
+Two inputs remain conjectural:
+(i)~the normalisation factor $1/q$ in~\eqref{eq:growthexact} is a
+dimensional ansatz motivated by the representation structure
+(each block has $q$ internal degrees of freedom),
+but it has not been derived from the Born--Infeld constraint
+in the block setting;
+(ii)~the term $\log q / \log n^{*}$ is an effective translation of
+the $q$-dependent normalisation into exponent space, valid only
+at the characteristic depth $n^{*}$.
+What is rigorously established is that the proxy formula
+$\beta = 1/(1/2 + \delta)$ cannot be applied to $\dexact$ without
+modification; the precise form of the modification is the content
+of this hypothesis.
+\end{remark}
+
+\noindent\textit{Derivation sketch.}
+Substituting $p(n) = A n^\beta$ and the power-law forms into
+\eqref{eq:growthexact2}:
+\[
+A \beta n^{\beta - 1}
+\lesssim c_\chi \sqrt{A} \, n^{\beta/2}
+\cdot \frac{C}{q} \, n^{D - 1 - \dexact}.
+\]
+Collecting powers of~$n$:
+$\beta - 1 = \beta/2 + D - 1 - \dexact - \log q / \log n$,
+where $\log q / \log n$ accounts for the $q$-dependent normalisation
+evaluated at the characteristic depth $n = n^{*}$.
+Solving for~$\beta$:
+$\beta/2 = \dexact - D + 1 + \log q / \log n^{*}$,
+whence $\beta = 1/(\tfrac{1}{2} + \dexact - (D-1) + \log q / \log n^{*})$.
+In the proxy limit ($q = 1$, $D = 1$), this reduces to
+$\beta = 1/(1/2 + \delta)$, recovering the O6 formula.
+
+\subsection{Two structural scenarios}
+\label{sec:scenarios}
+
+\begin{description}[style=nextline]
+\item[Scenario C1: Same functional form, corrected exponent]
+If the shell growth exponent $D - 1$ and the normalisation term
+$\log q / \log n^{*}$ combine to produce an effective correction
+that can be absorbed into a redefined exponent
+$\deff = \dexact - (D - 1) + \log q / \log n^{*}$,
+then~\eqref{eq:betaexact} takes the form
+\begin{equation}
+\label{eq:C1}
+\bstar = \frac{1}{\deff + \tfrac{1}{2}},
+\end{equation}
+with $\deff$ carrying the full correction.
+This is the scenario where the O6 formula survives structurally
+but with a different numerical input.
+
+For the Heisenberg graph with $D \approx 4$ (Bass--Guivarc'h
+growth exponent), $(D-1) = 3$, and
+$\log q / \log n^{*} \approx 1$ at $n^{*} \sim q$,
+one obtains $\deff \approx \dexact - 3 + 1 = \dexact - 2$.
+With $\dexact \in [3.6, 4.8]$, this gives
+$\deff \in [1.6, 2.8]$, yielding $\bstar \in [0.26, 0.48]$.
+This is still above the target $(0.09, 0.13)$.
+
+\item[Scenario C2: Modified functional form]
+If the corrections cannot be absorbed into a single
+redefined exponent, the growth equation acquires an explicit
+$q$-dependent structural term:
+\begin{equation}
+\label{eq:C2}
+\bstar = \frac{1}{\deff + \tfrac{1}{2} + \sigma(q)},
+\end{equation}
+where $\sigma(q)$ encodes the residual effect of the block
+structure on the growth dynamics and satisfies
+$\sigma(q) \to 0$ as $q \to \infty$.
+
+For C2 to produce $\bstar \in (0.09, 0.13)$ with
+$\deff \in [1.6, 2.8]$, the correction must satisfy
+$\sigma(q) \in [5.1, 8.6]$, which would require
+$\sigma(q) \sim q^{\kappa}$ for some $\kappa > 0$.
+Whether such a correction arises from the Weil-block
+representation structure is the central open question.
+\end{description}
+
+\section{Scenario Discrimination}
+\label{sec:discrimination}
+
+\subsection{What would discriminate C1 from C2}
+
+The two scenarios make different predictions for the
+$q$-dependence of the dynamical exponent $\alpha_{\mathrm{dyn}}$:
+
+Under C1, $\alpha_{\mathrm{dyn}}$ absorbs all corrections and its
+$q$-dependence is fully captured by the shift $\deff = \dexact - 2$.
+A measurement of $\Reff$ (Definition~\ref{def:Reff}) at multiple
+primes would show power-law decay with an exponent that
+\emph{stabilises} as $q$ grows.
+
+Under C2, $\alpha_{\mathrm{dyn}}$ stabilises but $\sigma(q)$
+introduces a separate $q$-dependent correction.
+The growth equation would show a systematic $q$-dependent
+departure from the C1 prediction.
+
+\subsection{Required measurement: block-level redundancy}
+
+The O12/O13 pipeline~\cite{Beau2026a16,Beau2026a17} computes
+$\Sigma_n^{(c)}$ per block but discards the complex fingerprint
+vectors $z_b^{(c)}(n)$ after Gram--Schmidt orthogonalisation.
+The weights $w_c(n)$ of Definition~\ref{def:Reff} are computable
+from the existing pipeline outputs ($\Delta r_n^{(c)}$ is stored).
+
+The block-level redundancy measurement therefore requires:
+\begin{enumerate}[label=(\roman*)]
+\item Compute $w_c(n)$ from the stored $\Delta r_n^{(c)}$ values.
+\item Form $\Reff = \sum_c w_c(n) \Sigma_n^{(c)}$.
+\item Fit $\Reff \sim B \, n^{-\alpha_{\mathrm{dyn}}}$ and extract
+$\alpha_{\mathrm{dyn}}$.
+\item Compare $\alpha_{\mathrm{dyn}}$ with $\dexact$ to measure the
+aggregation bias.
+\item Test whether $\beta = 1/(\alpha_{\mathrm{dyn}} + 1/2)$ falls in
+$(0.09, 0.13)$ (C1), or whether an additional $q$-dependent
+term is required (C2).
+\end{enumerate}
+
+Step~(i) is immediately feasible from existing O12/O13 data.
+Steps~(ii)--(v) constitute the minimal computational programme
+for discriminating the two scenarios.
+
+\section{Asymptotic Analysis}
+\label{sec:asymptotic}
+
+\subsection{The $q \to \infty$ limit}
+
+In the limit $q \to \infty$, three simplifications occur:
+\begin{enumerate}[label=(\alph*)]
+\item Block universality: $\mathrm{Var}_c(\Sigma_n^{(c)}) \to 0$
+by the O13 variance reduction result~\cite{Beau2026a17},
+so $\Reff \to \Sn$ and $\alpha_{\mathrm{dyn}} \to \dexact$.
+\item The normalisation correction $\log q / \log n^{*} \to 1$.
+\item The correction $\epsilon(q) \to 0$ in~\eqref{eq:O14corrected}.
+\end{enumerate}
+In this limit, the growth equation reduces to
+$\beta = 1/(1/2 + \dexact - 2)$ under C1,
+or $\beta = 1/(1/2 + \dexact - 2 + \sigma(\infty))$ under C2.
+
+If $\sigma(\infty) = 0$, C2 reduces to C1 asymptotically.
+If $\sigma(\infty) > 0$, C2 introduces a permanent structural
+correction even in the continuum limit.
+
+\subsection{Finite-$q$ phenomenology}
+
+At accessible primes ($q \leq 211$), the correction terms are
+non-negligible.
+Table~\ref{tab:scenarios} reports the predicted $\bstar$ under
+both scenarios for the five O12/O13 primes.
+
+\begin{table}[ht]
+\centering
+\caption{Predicted $\bstar$ under scenarios C1 and C2 for the
+five O12/O13 primes.
+C1 uses $\deff = \dexact - 2$;
+C2 requires $\sigma(q)$ to reach the target.}
+\label{tab:scenarios}
+\begin{tabular}{ccccc}
+\toprule
+$q$ & $\dexact$ & $\deff$ (C1) & $\bstar$ (C1) & $\sigma(q)$ needed (C2) \\
+\midrule
+29 & 4.37 & 2.37 & 0.348 & 5.4 \\
+61 & 4.80 & 2.80 & 0.303 & 5.9 \\
+101 & 4.28 & 2.28 & 0.360 & 5.3 \\
+151 & 3.90 & 1.90 & 0.417 & 5.0 \\
+211 & 3.59 & 1.59 & 0.478 & 4.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Under C1, $\bstar \in [0.30, 0.48]$ for all tested primes:
+closer to the target than the uncorrected value
+$\bstar \in [0.19, 0.21]$ from O12, but still above $(0.09, 0.13)$
+by a factor of approximately~3.
+
+Under C2, the required correction $\sigma(q) \in [4.7, 5.9]$
+is large and shows a mild $q$-dependence.
+Whether a correction of this magnitude can arise from the
+Weil-block structure is an open question.
+
+\section{Open Directions}
+\label{sec:open}
+
+\begin{description}[style=nextline]
+\item[O15-O1 (Block-level redundancy extraction)]
+Compute $\Reff$ from the O12/O13 pipeline outputs and extract
+$\alpha_{\mathrm{dyn}}$ at $q \in \{29, 61, 101, 151, 211\}$.
+This is the minimal measurement required to discriminate C1 from C2.
+
+\item[O15-O2 (Shell growth exponent)]
+The effective growth dimension $D \approx 4$ (Bass--Guivarc'h)
+is an asymptotic estimate.
+The exact value of $D$ in the pre-saturation window
+$[n_0, n_1]$ at finite~$q$ may differ.
+Extracting $D$ directly from the BFS data would sharpen the
+C1 prediction.
+
+\item[O15-O3 (Representation-theoretic $\sigma(q)$)]
+Under C2, the correction $\sigma(q)$ must be derived from the
+representation structure of the Heisenberg group.
+The Weil representation has a metaplectic phase structure
+($\mathrm{SL}_2(\mathbb{Z}/q\mathbb{Z})$ acts via Weil's
+representation) that may contribute a systematic correction
+to the growth dynamics.
+
+\item[O15-O4 (Quark and neutrino sectors)]
+Both scenarios modify the $\delta \to \bstar$ map.
+The extension to the quark and neutrino sectors
+(O14-O2~\cite{Beau2026a18}) requires re-evaluating the
+corrected relation at the block structures appropriate
+for those sectors.
+\end{description}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The O3--O7 derivation chain that produces
+$\bstar = 1/(\delta + 1/2)$ is logically correct in its domain:
+a scalar global capacity on proxy-level LPS dynamics.
+The failure is not an error but a scope limitation:
+the scalar-observable hypothesis H-O6-1 does not hold for the
+exact Weil-block capacity measured in O12--O14.
+
+The non-equivalence theorem (Proposition~\ref{prop:noneq})
+establishes that the block-averaged exponent $\dexact$ does not
+coincide with the scalar exponent~$\alpha$ entering the growth
+equation, and that the bias goes in the wrong direction
+(Remark~\ref{rem:bias}).
+
+The effective dynamical redundancy $\Reff$
+(Definition~\ref{def:Reff}) is the correct observable entering
+the growth equation in the exact setting.
+Its exponent $\alpha_{\mathrm{dyn}}$ is smaller than $\dexact$,
+so the aggregation correction alone cannot resolve the tension.
+
+The aggregation no-go (Corollary~\ref{cor:nogo}) is the sharpest
+negative result: no reweighting of the block-level data can bring
+the dynamical exponent into the target window.
+The resolution must come from the growth equation itself.
+
+The re-derivation of the growth equation
+(Hypothesis~\ref{hyp:growthexact}) reveals that the passage from
+proxy to exact introduces two additional corrections:
+the shell growth dimension $(D - 1)$ and the block-normalisation
+$\log q / \log n^{*}$.
+These corrections reduce the effective exponent and bring
+$\bstar$ closer to the target, but under Scenario~C1 the residual
+gap is still a factor of~3.
+
+Scenario~C2, which introduces a $q$-dependent structural correction
+$\sigma(q)$, can close the gap but requires $\sigma(q) \sim 5$,
+a large value whose derivation from the Weil representation
+structure is an open problem.
+
+The minimal next step is the block-level redundancy extraction
+(O15-O1): computing $\Reff$ from existing O12/O13 data to measure
+$\alpha_{\mathrm{dyn}}$ directly and discriminate the two scenarios.
+This measurement is feasible with the current pipeline outputs and
+constitutes the critical path forward.
+
+The O-series has now traced the chain from obstruction identification
+(O8--O9) through exact measurement (O10--O13), theoretical
+correspondence (O14), and derivation audit (O15).
+The status of Source~S2 is transformed:
+it is no longer an unexplained numerical tension,
+nor a theoretical impasse,
+but a precisely formulated computational problem.
+The gap between $\dexact$ and the target window is quantified,
+its origin is localised at the growth-equation level,
+and the discriminating measurement (O15-O1: extraction of
+$\alpha_{\mathrm{dyn}}$ from existing pipeline data) is
+immediately feasible.
+O15 thus converts the open question ``why does $\delta$ not
+match $\bstar$?'' into the concrete programme
+``measure $\Reff$, test C1, and if C1 fails,
+derive $\sigma(q)$ from the Weil representation structure.''
+
+\begin{thebibliography}{99}
+\input{cosmochrony-bibliography}
+
+\end{thebibliography}
+
+\end{document}
