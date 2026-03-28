@@ -26,9 +26,7 @@ to the exact Weil-block observable measured in O12–O14.
 # Core Result
 
 The paper establishes that the structural relation
-$
-\beta^* = \frac{1}{\delta + \tfrac12}
-$
+$\beta^* = \frac{1}{\delta + \tfrac12}$
 derived in **O6–O7** is **valid only for a scalar global observable** and
 does **not transfer automatically** to the exact-block setting.
 
