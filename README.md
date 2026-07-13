@@ -1,6 +1,6 @@
 This repository contains the source of the **O15** Cosmochrony paper  
-[*Scalar-to-Block Breakdown of the δ → β* Map:
-Why the O7 Growth Law Does Not Transfer to Exact Weil Capacity on Heisenberg Graphs*](out/SpectralO15.pdf).
+*Scalar-to-Block Breakdown of the δ → β* Map:
+Why the O7 Growth Law Does Not Transfer to Exact Weil Capacity on Heisenberg Graphs*.
 
 This work extends the **spectral admissibility sub-programme** by auditing the
 derivation chain **O3–O7** in light of the exact Weil-block results of **O12–O14**.
