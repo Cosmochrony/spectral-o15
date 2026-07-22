@@ -1,6 +1,11 @@
 This repository contains the source of the **O15** Cosmochrony paper  
-*Scalar-to-Block Breakdown of the δ → β* Map:
-Why the O7 Growth Law Does Not Transfer to Exact Weil Capacity on Heisenberg Graphs*.
+*Observable-Class Derivation Mismatch and the Heisenberg Transfer No-Go:
+From Proxy Capacity to Block-Level Span Dynamics*.
+
+**Version 1.15.2.** The non-equivalence theorem and aggregation no-go are unchanged.
+This version makes the stronger conclusion explicit: the native Heisenberg identity is
+$\Delta r_n=|S_n|\Sigma_n$, whereas the Born--Infeld square-root factor belongs to the LPS
+model. The legacy C1/C2 formulas are phenomenological diagnostics, not native growth laws.
 
 This work extends the **spectral admissibility sub-programme** by auditing the
 derivation chain **O3–O7** in light of the exact Weil-block results of **O12–O14**.
@@ -27,8 +32,8 @@ to the exact Weil-block observable measured in O12–O14.
 
 The paper establishes that the structural relation
 $\beta^* = \frac{1}{\delta + \tfrac12}$
-derived in **O6–O7** is **valid only for a scalar global observable** and
-does **not transfer automatically** to the exact-block setting.
+derived in **O6–O7** is conditional on the changing-degree LPS model and
+does **not transfer to the exact-block setting as constituted in the corpus**.
 
 The main logical result is a **non-transferability theorem**:
 
@@ -39,10 +44,17 @@ The main logical result is a **non-transferability theorem**:
   is **not**, in general, the exponent controlling the dynamic growth law of \(p(n)\)
 
 Thus the O7 chain
-$\bar\Sigma_n \sim p(n)^{-\delta}
+$\bar\Sigma_n \sim n^{-\delta}
 \quad \Longrightarrow \quad
 \beta^* = \frac{1}{\delta + \tfrac12}$
 fails in the exact Weil regime.
+
+The native Heisenberg statement is instead
+
+$\Delta r_n=|S_n|\Sigma_n\asymp n^{D-1-\delta}$
+
+on a finite pre-saturation window. It contains neither the changing valence $p(n)$ nor a
+native $c_{\mathrm{BI}}\sqrt p$ factor.
 
 ---
 
@@ -75,12 +87,12 @@ cannot be identified with the scalar redundancy observable entering the O6 growt
 
 This establishes that:
 - \(\hat\delta_{\mathrm{exact}}\) is a **measured block-mean exponent**
-- not automatically the **dynamic exponent** that controls \(p(n)\)
+- it is not a scalar exponent that may be inserted into the O6 growth equation
 
 ## 3. Aggregation no-go
 
-A new formal no-go result shows that **no choice of non-negative dynamic weights**
-on the blocks can produce a dynamic exponent larger than the measured exact exponent.
+A new formal no-go result shows that **no choice of non-negative block weights**
+can produce an aggregation exponent larger than the measured exact exponent.
 
 If
 $\hat\delta_{\mathrm{exact}} < 5.0,$
@@ -106,35 +118,35 @@ To avoid mixing distinct objects, the paper introduces a strict hierarchy of sym
   measured exponent from O12/O13 exact Weil-block capacity
 
 - \(\alpha_{\mathrm{dyn}}\):  
-  true dynamic exponent entering the modified growth law
+  exponent of the block-weighted aggregation observable
 
 - \(\delta_{\mathrm{eff}}\):  
-  recast exponent in the conservative scenario C1
+  legacy endpoint diagnostic in C1
 
 - \(\sigma(q)\):  
-  structural correction in the stronger scenario C2
+  additional denominator displacement in the legacy C2 diagnostic
 
 This hierarchy is central to the paper:
 the whole point of O15 is precisely that these quantities must **not** be conflated.
 
 ---
 
-# Effective Growth Law: Status
+# Native Identity and Transfer Status
 
-The paper introduces an **effective growth law under exact-block normalisation**,
-but explicitly classifies it as a **hypothesis**, not a theorem.
+The paper proves the exact identity $\Delta r_n=|S_n|\Sigma_n$ and audits the attempted
+transplantation of the LPS growth equation.
 
 What is rigorously established:
 
 - the scalar O6 law does not transfer
-- a corrected dynamic observable is required
+- no native pair-capacity growth carrier is defined
 - aggregation alone cannot save the target range
 
 What remains conjectural:
 
-- the precise \(1/q\) normalisation entering the exact-block growth law
-- the exponent-level translation involving \(\log q / \log n^*\)
-- the final exact form of the modified growth equation
+- a new native growth carrier, or an explicit two-substrate hypothesis
+- any inter-$q$ estimator and its normalisation
+- the coupling of a block observable to relational growth
 
 This distinction is made explicit throughout the paper.
 
@@ -158,7 +170,7 @@ After O15, the remaining issue is no longer:
 
 but rather:
 
-> “What is the correct dynamic observable that replaces the scalar O6/O7 quantity in the exact Weil-block regime?”
+> “Which native Heisenberg growth process, if any, can carry the block-level pair observable?”
 
 That is a much sharper and more calculable question.
 
@@ -170,7 +182,7 @@ O15 follows the chain:
 
 - **O12**: exact Weil-block extraction
 - **O13**: asymptotic elimination of the finite-size hypothesis
-- **O14**: observable-level mismatch identified and corrected
+- **O14**: observable and estimator layers separated
 - **O15**: derivation-level failure localised at the growth equation
 
 So O15 is the paper that establishes:
@@ -207,14 +219,13 @@ The central conceptual outcome is:
 - it is **not due to central-phase bias**
 - it is **not due to poor averaging across blocks**
 
-Instead:
-
-👉 the O7 scalar growth law is **not the correct equation** in the exact-block regime
+Instead, the O7 scalar growth law has no established native carrier in the
+fixed-degree Heisenberg cascade.
 
 This means that the remaining gap must be addressed at the level of:
 
-- the dynamic observable
-- the growth equation
+- the native growth observable
+- an equation derived on the same substrate
 - and possibly the representation-dependent structure of Weil blocks
 
 ---
@@ -229,7 +240,7 @@ The paper establishes that:
 
 - the scalar-to-block passage is the actual failure point
 - the block aggregation route cannot restore the target range
-- the next step must operate on the exact dynamic observable itself
+- the next step must derive a native carrier on the Heisenberg substrate itself
 
 So O15 transforms S2 from a broad tension into a concrete programme.
 
@@ -237,43 +248,39 @@ So O15 transforms S2 from a broad tension into a concrete programme.
 
 # Residual Open Problem
 
-The remaining open problem is now sharply defined:
+The remaining open problems are now sharply separated:
 
-- what is the correct exact-block observable
-  $R_n^{\mathrm{eff}}$
-  entering the growth equation for \(p(n)\)?
+- measure $R_n^{\mathrm{eff}}$ to quantify aggregation
+- construct a native pair-capacity growth carrier, or state a new two-substrate hypothesis
 
-Two scenarios remain:
+Two historical diagnostics are retained for traceability:
 
-## C1 — Conservative recast
-A corrected dynamic observable yields a modified exponent
+## C1 — Imported reciprocal form
+The legacy endpoint bookkeeping defines
 $\delta_{\mathrm{eff}},$
-but the functional form
+and inserts it into
 $\beta^* = \frac{1}{\delta_{\mathrm{eff}} + \tfrac12}$
-survives.
+as a phenomenological comparison.
 
-## C2 — Structural revision
-The exact Weil-block regime requires a further correction
+## C2 — Additional denominator term
+The second diagnostic introduces
 $\sigma(q),$
-so that the O7 map itself must be structurally revised.
+chosen to quantify the displacement needed to hit the reference window.
 
-O15 does not decide between C1 and C2,
-but shows that the decision must come from the exact dynamic observable,
-not from aggregation or reweighting.
+Neither diagnostic is a native Heisenberg growth law.
 
 ---
 
 # Open Directions
 
-1. **Extraction of \(R_n^{\mathrm{eff}}\) (O15-O1)**  
-   Build the true dynamic observable from the existing O12/O13 block data
+1. **Extraction of \(R_n^{\mathrm{eff}}\) (O15-O1)**
+   Quantify the aggregation observable from the existing O12/O13 block data
 
-2. **Test of Scenario C1**  
-   Determine whether the conservative recast can survive once
-   \(R_n^{\mathrm{eff}}\) is measured directly
+2. **Native growth carrier**
+   Construct a Heisenberg process carrying the pair observable
 
-3. **Derivation of \(\sigma(q)\) if C1 fails**  
-   Derive the structural correction from the Weil-block representation itself
+3. **Inter-$q$ estimator**
+   Define its target before assigning a $q$-normalisation exponent
 
 4. **Representation-level growth law**  
    Clarify how Born–Infeld boundedness translates from relational variables
@@ -301,7 +308,7 @@ It does not assume:
 
 - that the O7 scalar map extends to exact Weil blocks
 - that block averaging can recover the target
-- that \(\hat\delta_{\mathrm{exact}}\) is the dynamic exponent
+- that \(\hat\delta_{\mathrm{exact}}\) is an exponent entering a native growth equation
 - that the remaining tension is merely numerical
 
 ---
@@ -318,8 +325,8 @@ paper/
 
 If you reference this work, please cite:
 
-J. Beau, Scalar-to-Block Breakdown of the δ → β* Map:
-Why the O7 Growth Law Does Not Transfer to Exact Weil Capacity on Heisenberg Graphs,
+J. Beau, Observable-Class Derivation Mismatch and the Heisenberg Transfer No-Go:
+From Proxy Capacity to Block-Level Span Dynamics,
 Zenodo, 2026.
 
 # Acknowledgements
@@ -335,7 +342,7 @@ sole responsibility of the author.
 This repository is intended as a research reference.
 
 Critical feedback, independent verification, alternative derivations
-of the exact-block growth law, and direct extraction methods for
+of a native block-level growth carrier, and direct extraction methods for
 $R_n^{\mathrm{eff}}$ are welcome.
 
 Please open an issue to discuss conceptual points,
