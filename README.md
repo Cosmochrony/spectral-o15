@@ -10,8 +10,9 @@ model. The legacy C1/C2 formulas are phenomenological diagnostics, not native gr
 This work extends the **spectral admissibility sub-programme** by auditing the
 derivation chain **O3–O7** in light of the exact Weil-block results of **O12–O14**.
 
-While **O14** established that the exact observable does not satisfy the proxy-level
-relation between the capacity exponent and the cascade exponent, it still left open
+**O13** established, and **O12**'s independent corrective revision confirms analytically,
+that the exact observable does not satisfy the proxy-level relation between the capacity
+exponent and the cascade exponent as a finite-size artefact. This still left open
 a crucial question: **where exactly does the derivation fail?**
 
 The present work answers that question.
@@ -40,7 +41,7 @@ The main logical result is a **non-transferability theorem**:
 - the exponent
   $\hat\delta_{\mathrm{exact}}$
   extracted from the block mean
-  $\bar\Sigma_n = \frac{1}{q-1}\sum_c \Sigma_n^{(c)}$
+  $\bar\Sigma_n = \frac{1}{|\mathcal{C}_{\mathrm{gen}}|}\sum_{c\in\mathcal{C}_{\mathrm{gen}}} \Sigma_n^{(c)}$
   is **not**, in general, the exponent controlling the dynamic growth law of \(p(n)\)
 
 Thus the O7 chain
@@ -82,7 +83,7 @@ So the issue is not a mathematical error in O3–O7, but a **domain-of-validity 
 ## 2. Non-equivalence of observables
 
 The paper proves that the exact observable
-$\bar\Sigma_n = \frac{1}{q-1}\sum_c \Sigma_n^{(c)}$
+$\bar\Sigma_n = \frac{1}{|\mathcal{C}_{\mathrm{gen}}|}\sum_{c\in\mathcal{C}_{\mathrm{gen}}} \Sigma_n^{(c)}$
 cannot be identified with the scalar redundancy observable entering the O6 growth law.
 
 This establishes that:
@@ -310,6 +311,19 @@ It does not assume:
 - that block averaging can recover the target
 - that \(\hat\delta_{\mathrm{exact}}\) is an exponent entering a native growth equation
 - that the remaining tension is merely numerical
+
+---
+
+# Reproducibility and Numerical Provenance
+
+O15 is a derivation and audit paper: it performs no independent numerical
+computation and has no `code/` directory. Every numerical value used in the
+paper — the fitted exponents $\hat\delta_{\mathrm{exact}}(q)$ and the
+inter-block variance ratios $V_n^{\max}(q)$ — is drawn directly, unmodified,
+from O12's and O13's own published, independently reproducible pipelines.
+The one measurement O15 motivates but does not perform — extracting the
+aggregation exponent $\alpha_{\mathrm{dyn}}$ from $R_n^{\mathrm{eff}}$
+(open direction O15-O1) — is explicit future work, not a claimed result.
 
 ---
 

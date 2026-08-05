@@ -45,16 +45,23 @@ From Proxy Capacity to Block-Level Span Dynamics}
 The O3--O7 derivation chain proposes, on a changing-degree LPS family, the relation
 $\bstar = 1/(\delta + 1/2)$ linking the capacity decay exponent~$\delta$
 to the cascade growth exponent~$\bstar$ governing charged-lepton mass ratios.
-Papers O12--O14 demonstrated that the exact Weil-block capacity exponent
-$\dexact(q) \in [3.6, 4.8]$ is incompatible with the target window
-$\delta \in [7.4, 10.6]$, and that this tension is structural rather than
-a finite-size artefact.
-The present paper identifies the precise origin of the mismatch and proves a
-non-transferability result:
+O13 established that the exact Weil-block capacity exponent
+$\dexact(q) \in [3.6, 4.8]$ does not drift toward the target window
+$\delta \in [7.4, 10.6]$ as $q$ grows, ruling out a finite-size explanation of
+the tension; O12's independent corrective revision derives, in closed form,
+the intrinsic asymptotic value the finite-$q$ fits are converging toward,
+$\delta_{\mathrm{exact}}=3$, confirming this analytically rather than by
+extrapolation, and shows the fitted values carry no central-coordinate
+dependence of any kind.
+The present paper identifies a distinct, independent structural reason —
+unrelated to the central coordinate — that the tension cannot be resolved by
+refining the block-level measurement, and proves a non-transferability
+result:
 the O6 growth equation $\mathrm{d}p/\mathrm{d}n \lesssim \Rn \, c_{\mathrm{BI}} \sqrt{p(n)}$
 derives $\bstar$ from a \emph{scalar global} redundancy functional~$\Rn$,
 whereas the exact observable measured in O12--O13 is a \emph{block-averaged}
-capacity over $(q-1)$ Weil representations of internal dimension~$q$.
+capacity over a finite sampled subset of generic-triple Weil representations,
+each of internal dimension~$q$.
 We prove a non-equivalence theorem establishing that the block-averaged
 exponent $\dexact$ does not, in general, coincide with the scalar exponent~$\alpha$
 entering the growth equation.
@@ -121,19 +128,35 @@ The admissibility sub-programme has traced a sequence from obstruction
 identification (O8--O9~\cite{Beau2026a12,Beau2026a13}) through exact
 measurement (O10--O13~\cite{Beau2026a14,Beau2026a15,Beau2026a16,Beau2026a17})
 to observable and estimator separation (O14~\cite{Beau2026a18}).
-O14 established that the tension between the exact Weil-block capacity
+O13 established, and O12's independent corrective revision confirms
+analytically, that the tension between the exact Weil-block capacity
 exponent $\dexact(q) \in [3.6, 4.8]$ and the phenomenological target
 $\delta \in [7.4, 10.6]$ is not a numerical artefact (refuting hypothesis~S1
-of O13) but a structural mismatch (Source~S2).
-The conditional endpoint diagnostic retained in O14,
+of O13); the present paper identifies a distinct structural mismatch
+(Source~S2, Section~\ref{sec:audit}).
+O14 retains a conditional endpoint diagnostic,
 \begin{equation}
 \label{eq:O14corrected}
 \beta_{\mathrm{diag}} = \frac{1}{\deff + \tfrac{1}{2}} + \epsilon(q),
 \end{equation}
-uses $\deff = \dexact - \delta_{\gamma,\mathrm{corr}}
-- \eta \cdot \log q / \log n^{*}$ only as an endpoint/inter-$q$ estimator.
-The legacy diagnostic selects Scenario~S2-B for all tested primes.
-At fixed $q$, the factor $q^{-\eta}$ changes the regression intercept, not its slope.
+using $\deff = \dexact - \delta_{\gamma,\mathrm{corr}}
+- \eta \cdot \log q / \log n^{*}$ as an endpoint/inter-$q$ estimator, where
+$\delta_{\gamma,\mathrm{corr}}$ is O14's modelled central-phase bias.
+This modelled term should be treated with caution: O12's corrective revision
+proves $\Sigma_n^{(c)}$ is algebraically blind to the central coordinate
+$\gamma$, which is in tension with treating $\delta_{\gamma,\mathrm{corr}}$
+as a genuine nonzero contribution rather than an artefact of the estimator.
+The point is not load-bearing for O14's own numeric conclusion, however:
+O14's own data shows $\delta_{\gamma,\mathrm{corr}}\in[0.008,0.023]$ is
+already negligible next to the endpoint term ($\approx 1.0$--$1.06$), which
+dominates the diagnostic and is what selects Scenario~S2-B for all tested
+primes.
+At fixed $q$, the factor $q^{-\eta}$ changes the regression intercept, not
+its slope.
+A full re-audit of O14's central-phase decomposition against O12's blindness
+result is left as future work; it is not needed for anything proved in the
+present paper, none of which uses $\delta_{\gamma,\mathrm{corr}}$ or
+$\beta_{\mathrm{diag}}$.
 
 O14 thus separated the measurement question from the
 \emph{derivation} question:
@@ -180,6 +203,24 @@ Born--Infeld growth factor does not transfer (Section~\ref{sec:rederivation}).
 \item We retain C1 and C2 only as legacy phenomenological diagnostics and specify the
 block-level measurement needed to quantify aggregation (Section~\ref{sec:discrimination}).
 \end{enumerate}
+
+\subsection{Status of numerical inputs}
+\label{sec:reproducibility}
+
+This paper is a derivation and audit paper: it introduces no independent
+numerical computation and has no accompanying \texttt{code/} directory.
+Every numerical value used here — the fitted exponents $\dexact(q)$ of
+Table~\ref{tab:scenarios} and the inter-block variance ratios
+$V_n^{\max}(q)$ of Remark~\ref{rem:quantitative} — is drawn directly from
+O12's and O13's own published, independently reproducible pipelines and
+benchmark outputs~\cite{Beau2026a16,Beau2026a17}, unmodified.
+The one computation this paper motivates but does not perform — extracting
+the aggregation exponent $\alpha_{\mathrm{dyn}}$ from $\Reff$
+(Definition~\ref{def:Reff}) at the five sampled primes, open direction
+O15-O1 (Section~\ref{sec:discrimination}) — is explicit future work, not a
+result claimed by the present paper, and requires no new pipeline beyond
+storing an intermediate quantity ($\Delta r_n^{(c)}$) the existing O12/O13
+code already computes.
 
 \section{Audit of the O3--O7 Derivation Chain}
 \label{sec:audit}
@@ -237,7 +278,8 @@ representation structure~\cite{Beau2026a11}.
 It is indeed a scalar function of~$n$.
 
 In the exact setting (O12--O14), the observable is
-$\Sn = \mathbb{E}_c[\Sigma_n^{(c)}]$, a mean over $(q-1)$ Weil blocks,
+$\Sn = \mathbb{E}_c[\Sigma_n^{(c)}]$, a mean over a finite sampled subset
+$\mathcal{C}_{\mathrm{gen}}$ of generic-triple Weil blocks (Section~\ref{sec:noneq}),
 each of internal dimension~$q$.
 This is not a scalar observable in the sense of H-O6-1: it carries
 a hidden dependence on the block structure through the averaging.
@@ -298,17 +340,30 @@ satisfying the growth equation.
 \subsection{Setup}
 
 Fix an odd prime~$q$.
-The Heisenberg group $G_q = \mathrm{Heis}_3(\mathbb{Z}/q\mathbb{Z})$
-has $(q-1)$ faithful irreducible representations
-$\rho_c$ ($c \in (\mathbb{Z}/q\mathbb{Z})^\times$), each of dimension~$q$.
+The O12/O13 pipeline does not index blocks by a single scalar character:
+a generic block is a multi-index $c=(c_1,c_2,c_3)\in(\mathbb{Z}/q\mathbb{Z})^3$
+with $c_i\neq0$ and $c_1+c_2+c_3\not\equiv0\pmod q$~\cite{Beau2026a16}, and
+each generic block $H_c$ has dimension~$q$ (O12, Proposition~3.1).
+There are $\Theta(q^3)$ admissible triples; the O12/O13 pipeline samples a
+finite subset $\mathcal{C}_{\mathrm{gen}}$ of $M_{\mathrm{block}}\in[15,50]$
+of them per prime~\cite{Beau2026a16,Beau2026a17} — it does not, and by cost
+cannot, exhaust the admissible set.
+Throughout this paper, $c$ denotes such a triple and $\mathcal{C}_{\mathrm{gen}}$
+the sampled set actually used at a given prime; $\mathbb{E}_c[\cdot]$ denotes
+the sample average $\frac{1}{|\mathcal{C}_{\mathrm{gen}}|}\sum_{c\in\mathcal{C}_{\mathrm{gen}}}(\cdot)$,
+not an average over an exhaustive index set.
 The block-level projective capacity at BFS depth~$n$ in block~$c$ is
 \begin{equation}
 \label{eq:blockcap}
 \Sigma_n^{(c)} = \frac{\Delta r_n^{(c)}}{|S_n|},
 \end{equation}
 where $\Delta r_n^{(c)}$ is the incremental projective span in
-representation~$\rho_c$ and $|S_n|$ is the BFS shell size.
+block~$H_c$ and $|S_n|$ is the BFS shell size.
 The block average is $\Sn = \mathbb{E}_c[\Sigma_n^{(c)}]$.
+None of the results below depend on the index set being exhaustive or
+one-dimensional: the Jensen and Chebyshev arguments of
+Sections~\ref{sec:noneq} and~\ref{sec:Reff} hold for any finite index set,
+so they apply unchanged to the sampled triple set $\mathcal{C}_{\mathrm{gen}}$.
 
 In the proxy setting, the capacity is a single scalar
 $C_n^{\mathrm{proxy}}$ defined via the Fourier-character
@@ -384,16 +439,26 @@ This is consistent with the O12--O13 observation that $\dexact$
 lies below the target window.
 \end{remark}
 
-\begin{remark}[Quantitative estimate from O12--O13 data]
+\begin{remark}[Quantitative data, correctly attributed]
 \label{rem:quantitative}
-O12~\cite{Beau2026a16} reports inter-block variance ratios
-$V_n^{\max}(q)$ that decrease from $\sim 0.15$ at $q = 29$ to
-$\sim 0.03$ at $q = 211$.
-Even at $q = 211$, the residual variance produces a bias of order
-$|\dexact - \bar{\delta}| \sim 0.1$--$0.3$, which is insufficient
-to bridge the gap to the target $\delta \in [7.4, 10.6]$.
-The non-equivalence is therefore real but quantitatively small
-compared to the total deficit.
+O13~\cite{Beau2026a17}, not O12 (which tested only $q\in\{29,53,61\}$),
+reports the inter-block variance ratio at the five primes actually measured:
+$V_n^{\max}(q) = 5.20, 2.75, 1.60, 0.65, 0.30$ for
+$q = 29, 61, 101, 151, 211$ respectively — a real and substantial decrease,
+but roughly an order of magnitude larger throughout than a value that would,
+on its own, look negligible.
+We do not attempt to convert this into a numeric bias
+$|\dexact-\bar\delta|$ here: Proposition~\ref{prop:noneq}'s exact correction
+term depends on the relative \emph{amplitude} variance $V_A$, a distinct
+quantity from $V_n^{\max}$ (a variance of $\Sigma_n^{(c)}$ itself) that is
+not directly reported by O12/O13, and estimating $V_A$ from $V_n^{\max}$
+without further computation would not be rigorous.
+This is immaterial to the paper's conclusion: Corollary~\ref{cor:nogo} below
+proves unconditionally, for \emph{any} relative amplitude variance and any
+choice of non-negative weights, that no aggregation can push the exponent
+above $\dexact$ itself — so the exact size of the non-equivalence bias does
+not need to be pinned down to establish that it cannot bridge the deficit
+to $\delta\in[7.4,10.6]$.
 \end{remark}
 
 \subsection{Consequence for the growth equation}
@@ -445,7 +510,7 @@ In the exact setting, the identification is more subtle because
 The effective dynamical redundancy at cascade rank~$n$ is
 \begin{equation}
 \label{eq:Reffdef}
-\Reff = \frac{1}{q-1} \sum_{c \in (\mathbb{Z}/q\mathbb{Z})^\times}
+\Reff = \frac{1}{|\mathcal{C}_{\mathrm{gen}}|} \sum_{c \in \mathcal{C}_{\mathrm{gen}}}
 w_c(n) \, \Sigma_n^{(c)},
 \end{equation}
 where $w_c(n)$ is the dynamical weight of block~$c$, defined as
@@ -453,10 +518,10 @@ where $w_c(n)$ is the dynamical weight of block~$c$, defined as
 \label{eq:weights}
 w_c(n)
 = \frac{\Delta r_n^{(c)} / \dim V_c}
-{\sum_{c'} \Delta r_n^{(c')} / \dim V_{c'}}
+{\sum_{c'\in\mathcal{C}_{\mathrm{gen}}} \Delta r_n^{(c')} / \dim V_{c'}}
 = \frac{\Delta r_n^{(c)} / q}
-{\sum_{c'} \Delta r_n^{(c')} / q}
-= \frac{\Delta r_n^{(c)}}{\sum_{c'} \Delta r_n^{(c')}}.
+{\sum_{c'\in\mathcal{C}_{\mathrm{gen}}} \Delta r_n^{(c')} / q}
+= \frac{\Delta r_n^{(c)}}{\sum_{c'\in\mathcal{C}_{\mathrm{gen}}} \Delta r_n^{(c')}}.
 \end{equation}
 \end{definition}
 
@@ -476,21 +541,22 @@ Then
 \begin{equation}
 \label{eq:relation}
 \Reff = \Sn + \mathrm{Cov}_c\!\left(
-\frac{w_c}{1/(q-1)}, \, \Sigma_n^{(c)}
+\frac{w_c}{1/|\mathcal{C}_{\mathrm{gen}}|}, \, \Sigma_n^{(c)}
 \right),
 \end{equation}
-where the covariance is taken over the uniform distribution on blocks.
-The correction vanishes if the weights are uniform ($w_c = 1/(q-1)$
-for all~$c$), which occurs if and only if all blocks contribute
-equally to the incremental span.
+where the covariance is taken over the uniform distribution on
+$\mathcal{C}_{\mathrm{gen}}$.
+The correction vanishes if the weights are uniform
+($w_c = 1/|\mathcal{C}_{\mathrm{gen}}|$ for all~$c$), which occurs if and
+only if all sampled blocks contribute equally to the incremental span.
 \end{proposition}
 
 \begin{proof}
 Direct computation:
 $\Reff - \Sn
-= \sum_c w_c \Sigma_n^{(c)} - \frac{1}{q-1} \sum_c \Sigma_n^{(c)}
-= \sum_c (w_c - \frac{1}{q-1}) \Sigma_n^{(c)}
-= (q-1) \mathrm{Cov}_c(w_c, \Sigma_n^{(c)})$.
+= \sum_c w_c \Sigma_n^{(c)} - \frac{1}{|\mathcal{C}_{\mathrm{gen}}|} \sum_c \Sigma_n^{(c)}
+= \sum_c (w_c - \frac{1}{|\mathcal{C}_{\mathrm{gen}}|}) \Sigma_n^{(c)}
+= |\mathcal{C}_{\mathrm{gen}}| \, \mathrm{Cov}_c(w_c, \Sigma_n^{(c)})$.
 \end{proof}
 
 \begin{remark}[Sign of the correction]
@@ -543,7 +609,7 @@ of a single common variable, the Chebyshev sum inequality gives
 \sum_c w_c \, \Sigma_n^{(c)}
 \;\geq\;
 \left(\sum_c w_c\right)
-\left(\frac{1}{q-1} \sum_c \Sigma_n^{(c)}\right)
+\left(\frac{1}{|\mathcal{C}_{\mathrm{gen}}|} \sum_c \Sigma_n^{(c)}\right)
 = \Sn,
 \]
 so $\Reff \geq \Sn$ pointwise in~$n$.
@@ -564,27 +630,30 @@ hypothesis.
 \subsection{Native identity and the two-substrate ansatz}
 
 In the exact setting, the BFS frontier at step~$n$ contributes new
-relational degrees of freedom through all $(q-1)$ Weil blocks
-simultaneously.
-The total incremental span is
+relational degrees of freedom through the sampled Weil blocks
+$c\in\mathcal{C}_{\mathrm{gen}}$ simultaneously (the pipeline never sums
+over all $\Theta(q^3)$ admissible triples; see Section~\ref{sec:noneq}).
+The total incremental span over the sample is
 \begin{equation}
 \label{eq:totalspan}
 \Delta r_n^{\mathrm{tot}}
-= \sum_{c} \Delta r_n^{(c)}.
+= \sum_{c\in\mathcal{C}_{\mathrm{gen}}} \Delta r_n^{(c)}.
 \end{equation}
 Each block~$c$ lives in a representation space of dimension~$q$,
-so the total available representation space has dimension
-$(q-1) \cdot q \sim q^2$.
+so the sampled representation space has dimension
+$|\mathcal{C}_{\mathrm{gen}}| \cdot q$ — a proxy for, not an exhaustive
+count of, the total available representation space, whose exact
+dimension over all admissible triples would be $\Theta(q^3)\cdot q=\Theta(q^4)$.
 
 Importing the LPS Born--Infeld growth factor would give the two-substrate ansatz
 \begin{equation}
 \label{eq:growthexact}
 \frac{\mathrm{d}p}{\mathrm{d}n}
 \lesssim c_{\mathrm{BI}} \sqrt{p(n)} \cdot
-\frac{\Delta r_n^{\mathrm{tot}}}{(q-1) \cdot q},
+\frac{\Delta r_n^{\mathrm{tot}}}{|\mathcal{C}_{\mathrm{gen}}| \cdot q},
 \end{equation}
-where the denominator $(q-1) \cdot q$ normalises by the total number
-of representation degrees of freedom.
+where the denominator $|\mathcal{C}_{\mathrm{gen}}| \cdot q$ normalises by
+the sampled number of representation degrees of freedom.
 This equation is not native to the Heisenberg cascade: its
 $c_{\mathrm{BI}}\sqrt{p(n)}$ factor comes from the changing-degree expander model, while
 the exact-block factor comes from the fixed-degree nilpotent model.
@@ -617,16 +686,16 @@ Neither choice supplies the missing Born--Infeld coupling.
 \subsection{Separation of variables}
 
 Rewrite~\eqref{eq:growthexact} using
-$\Delta r_n^{\mathrm{tot}} / ((q-1) \cdot q)
-= \frac{1}{q} \cdot \frac{1}{q-1} \sum_c \Delta r_n^{(c)} / |S_n|
+$\Delta r_n^{\mathrm{tot}} / (|\mathcal{C}_{\mathrm{gen}}| \cdot q)
+= \frac{1}{q} \cdot \frac{1}{|\mathcal{C}_{\mathrm{gen}}|} \sum_c \Delta r_n^{(c)} / |S_n|
 \cdot |S_n|
 = \frac{|S_n|}{q} \cdot \Sn$,
-where we used $\Sn = \frac{1}{q-1} \sum_c \Sigma_n^{(c)}$
+where we used $\Sn = \frac{1}{|\mathcal{C}_{\mathrm{gen}}|} \sum_c \Sigma_n^{(c)}$
 with $\Sigma_n^{(c)} = \Delta r_n^{(c)} / |S_n|$.
 Thus the exact Heisenberg bookkeeping identity is
 \begin{equation}
 \label{eq:growthexact2}
-\frac{1}{q-1}\Delta r_n^{\mathrm{tot}} = |S_n|\Sn.
+\frac{1}{|\mathcal{C}_{\mathrm{gen}}|}\Delta r_n^{\mathrm{tot}} = |S_n|\Sn.
 \end{equation}
 
 In the BFS growth regime on the Heisenberg graph,
@@ -779,24 +848,30 @@ These are algebraic comparisons only; no native conclusion follows from either l
 
 At accessible primes ($q \leq 211$), the correction terms are
 non-negligible.
-Table~\ref{tab:scenarios} reports the reciprocal diagnostics for the five O12/O13 primes.
+Table~\ref{tab:scenarios} reports the reciprocal diagnostics for O13's five
+tested primes~\cite{Beau2026a17}, using O13's own corrected values (its
+$q=29$ figure is a single-seed measurement, distinct from O12's independent
+three-seed mean at the same prime; see O13, Table~1).
 
 \begin{table}[ht]
 \centering
-\caption{Legacy reciprocal diagnostics C1 and C2 for the five O12/O13 primes.
-C1 uses $\deff = \dexact - 2$;
-C2 requires $\sigma(q)$ to reach the target.}
+\caption{Legacy reciprocal diagnostics C1 and C2 for O13's five tested primes.
+C1 uses $\deff = \dexact - 2$; C2's $\sigma(q)$ is the displacement needed to
+reach the representative target value $\bstar=0.11$ (the midpoint of
+$(0.09,0.13)$), reported for illustration only — the diagnostic itself
+carries no derived structural interpretation regardless of which point in
+the window is targeted.}
 \label{tab:scenarios}
 \begin{tabular}{ccccc}
 \toprule
 $q$ & $\dexact$ & $\deff$ (C1) & $\beta_{\mathrm{C1}}^{\mathrm{diag}}$
 & $\sigma(q)$ needed (C2) \\
 \midrule
-29 & 4.37 & 2.37 & 0.348 & 5.4 \\
-61 & 4.80 & 2.80 & 0.303 & 5.9 \\
-101 & 4.28 & 2.28 & 0.360 & 5.3 \\
-151 & 3.90 & 1.90 & 0.417 & 5.0 \\
-211 & 3.59 & 1.59 & 0.478 & 4.7 \\
+29 & 4.42 & 2.42 & 0.342 & 6.17 \\
+61 & 4.80 & 2.80 & 0.303 & 5.79 \\
+101 & 4.51 & 2.51 & 0.332 & 6.08 \\
+151 & 4.27 & 2.27 & 0.361 & 6.32 \\
+211 & 3.59 & 1.59 & 0.478 & 7.00 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -804,8 +879,8 @@ $q$ & $\dexact$ & $\deff$ (C1) & $\beta_{\mathrm{C1}}^{\mathrm{diag}}$
 Under C1, the reciprocal diagnostic lies between $0.30$ and $0.48$ for all tested primes.
 It is outside the interval $(0.09,0.13)$.
 
-Under C2, the denominator displacement required to hit the target is
-$\sigma(q)\in[4.7,5.9]$.
+Under C2, the denominator displacement required to reach the representative
+target $\bstar=0.11$ is $\sigma(q)\in[5.79,7.00]$.
 This number has no derived structural interpretation.
 
 \section{Open Directions}
