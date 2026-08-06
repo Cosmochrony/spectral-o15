@@ -22,10 +22,10 @@ Results (including per-block timings, for future ETA calibration) are
 written to results/o15_o1_q<q>.json, so a run's exact numeric output is a
 citable artefact on disk, not only a terminal transcript.
 
-Status as of this script's addition (v1.16.1): run and confirmed at q=151
-only. The other four tested primes (29, 61, 101, 211) remain open --
-O15-O1 is partially, not fully, completed. See the README and
-SpectralO15.tex Section 8 for the exact q=151 result and its scope.
+Status as of this script's latest run: confirmed at q=151 and q=211.
+The other three tested primes (29, 61, 101) remain open -- O15-O1 is
+partially, not fully, completed. See the README and SpectralO15.tex
+Section 8 for the exact q=151/q=211 results and their scope.
 """
 import json
 import sys

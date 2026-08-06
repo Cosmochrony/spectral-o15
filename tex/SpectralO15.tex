@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{enumitem}
 \usepackage{amsfonts}
 \usepackage{amsopn}
@@ -100,7 +101,7 @@ cascade exponent, spectral admissibility.
   \noindent
   The four exponents appearing in this paper form a strict hierarchy:
   \begin{center}
-    \begin{tabular}{clp{7.5cm}}
+    \begin{tabular}{cl>{\raggedright\arraybackslash}p{7.5cm}}
       \toprule
       Symbol & Name & Definition \\
       \midrule
@@ -225,10 +226,10 @@ outputs~\cite{Beau2026a16,Beau2026a17}, unmodified.
 One computation this paper motivates — extracting the aggregation exponent
 $\alpha_{\mathrm{dyn}}$ from $\Reff$ (Definition~\ref{def:Reff}), open
 direction O15-O1 (Section~\ref{sec:discrimination}) — has since been
-performed at one of the five sampled primes ($q=151$,
+performed at two of the five sampled primes ($q=151$ and $q=211$,
 Section~\ref{sec:q151}), with reproduction code and its exact parameters,
 seed, and output in \texttt{code/o15\_o1\_nogo\_verification.py}.
-The other four primes remain explicit future work, not results claimed by
+The other three primes remain explicit future work, not results claimed by
 this paper.
 
 \section{Audit of the O3--O7 Derivation Chain}
@@ -512,7 +513,7 @@ directly proportional to the capacity: $\Rn \propto \Sigma_n$.
 In the exact setting, the identification is more subtle because
 ``genuinely new'' must be defined relative to the full block structure.
 
-\subsection{Definition of $\Reff$}
+\subsection{Definition of \texorpdfstring{$\Reff$}{R\_eff}}
 
 \begin{definition}[Effective dynamical redundancy]
 \label{def:Reff}
@@ -579,7 +580,7 @@ The effective dynamical redundancy is \emph{larger} than the
 unweighted block average.
 \end{remark}
 
-\subsection{Exponent of $\Reff$}
+\subsection{Exponent of \texorpdfstring{$\Reff$}{R\_eff}}
 
 \begin{definition}[Block-weighted aggregation exponent]
 \label{def:alphaeff}
@@ -639,8 +640,8 @@ $V_n$ — a finer-grained quantity than the peak value $V_n^{\max}$ already
 reported in O12/O13 (Remark~\ref{rem:quantitative}) — using the
 $\Delta r_n^{(c)}$ values the existing pipeline already computes and stores;
 verifying it at the tested primes is exactly open direction~O15-O1
-(Section~\ref{sec:discrimination}), performed here at $q=151$ only
-(Section~\ref{sec:q151}), where it holds.
+(Section~\ref{sec:discrimination}), performed here at $q=151$ and
+$q=211$ (Section~\ref{sec:q151}), where it holds at both.
 Since $\dexact < 5.0 \ll 7.4$ at every tested prime, this weighted
 aggregation observable cannot reach the target window $[7.4, 10.6]$ at any
 prime where the condition is confirmed to hold.
@@ -677,9 +678,9 @@ blocks, with weights concentrated on the highest-rank blocks,'' the natural
 reweighting the growth equation motivates, as a route to the target window,
 conditional on the checkable OLS-slope condition above (of which pointwise
 monotonicity is only a sufficient special case), whose verification at the
-tested primes is open direction~O15-O1 --- done at $q=151$
-(Section~\ref{sec:q151}), where the condition holds, still open at the
-other four tested primes.
+tested primes is open direction~O15-O1 --- done at $q=151$ and $q=211$
+(Section~\ref{sec:q151}), where the condition holds at both, still open
+at the other three tested primes.
 It does not, in its present form, rule out every conceivable non-negative
 reweighting.
 Any future resolution requires a new growth carrier or an explicitly stated
@@ -885,47 +886,57 @@ Step~(i) is immediately feasible from existing O12/O13 data.
 Steps~(ii)--(v) constitute the minimal computational programme for resolving the aggregation
 observable; they do not restore the transfer.
 
-\subsection{First finite verification, at $q=151$}
+\subsection{First finite verifications, at \texorpdfstring{$q=151$ and $q=211$}{q=151 and q=211}}
 \label{sec:q151}
 
-Steps (i)--(iv) have been carried out at a single prime, $q=151$, using
-$m_{\mathrm{block}}=10$ blocks, $n_{\mathrm{max}}=37$, BFS truncation
-fraction $0.29$, and seed $\texttt{RNG\_BASE}+q$
-(\texttt{code/o15\_o1\_nogo\_verification.py 151}).
-This is a first finite check, not a universal validation: the result below
-holds for this prime, this block sample, and this seed, and is reported as
-such.
+Steps (i)--(iv) have been carried out at two primes.
+At $q=151$: $m_{\mathrm{block}}=10$, $n_{\mathrm{max}}=37$, BFS truncation
+fraction $0.29$ (\texttt{code/o15\_o1\_nogo\_verification.py 151}).
+At $q=211$: $m_{\mathrm{block}}=10$, $n_{\mathrm{max}}=50$, BFS truncation
+fraction $0.11$ (\texttt{code/o15\_o1\_nogo\_verification.py 211}).
+Both runs use seed $\texttt{RNG\_BASE}+q$.
+These are two finite checks, not a universal validation: each result holds
+for its own prime, block sample, and seed, and is reported as such.
 
-The exact identity of Proposition~\ref{prop:exact-identity} is confirmed to
-machine precision: $\max_n|\Reff-\Sn(1+V_n)| = 7.1\times10^{-15}$.
-Over the fitting window, the OLS slope of $\log(1+V_n)$ against $\log n$ ---
-Corollary~\ref{cor:nogo}'s hypothesis --- is $0.2842$, positive, so the
-hypothesis holds at this prime and this corollary applies:
-$\alpha_{\mathrm{dyn}}=3.9824 \leq \dexact=4.2666$, consistent with the
-corollary's conclusion.
+At both primes, the exact identity of Proposition~\ref{prop:exact-identity}
+is confirmed to machine precision
+($\max_n|\Reff-\Sn(1+V_n)| = 7.1\times10^{-15}$ at $q=151$;
+$3.6\times10^{-15}$ at $q=211$).
+Over each fitting window, the OLS slope of $\log(1+V_n)$ against $\log n$
+--- Corollary~\ref{cor:nogo}'s hypothesis --- is positive
+($0.2842$ at $q=151$; $0.0419$ at $q=211$), so the hypothesis holds at
+both primes and the corollary applies:
+$\alpha_{\mathrm{dyn}} \leq \dexact$
+($3.9824 \leq 4.2666$ at $q=151$; $3.5466 \leq 3.5885$ at $q=211$),
+consistent with the corollary's conclusion at both.
 
-This is a genuinely weaker check than the corollary's stated sufficient
-condition: $1+V_n$ is \emph{not} pointwise non-decreasing on this window
-($V_n$ values $0.1134, 0.1237, 0.2413, 0.3625, 0.2948, 0.3855, 0.4931,
-0.6529, 0.6327, 0.4793$, which dips at two points).
+At both primes this is a genuinely weaker check than the corollary's stated
+sufficient condition: $1+V_n$ is \emph{not} pointwise non-decreasing on
+either window
+($V_n$ at $q=151$: $0.1134$, $0.1237$, $0.2413$, $0.3625$, $0.2948$,
+$0.3855$, $0.4931$, $0.6529$, $0.6327$, $0.4793$, decreasing at three of
+the nine steps, in two separate regions;
+$V_n$ at $q=211$: $0.0960$, $0.2352$, $0.2480$, $0.3021$, $0.2854$,
+$0.2691$, $0.2314$, $0.2295$, $0.2295$, $0.2383$, $0.2426$, rising, then
+falling across five consecutive steps, then rising again).
 The necessary condition Corollary~\ref{cor:nogo} actually requires ---
 non-negative covariance of $\log n$ with $\log(1+V_n)$, equivalently
-non-negative OLS slope --- is the one that holds here, and is the one the
-corollary's proof uses; pointwise monotonicity is only ever a sufficient
-special case (Corollary~\ref{cor:nogo}'s statement).
-Distinguishing the two matters: a future prime could fail the sufficient
-(monotone) condition while still satisfying the necessary (OLS) one, as
-happens here.
+non-negative OLS slope --- is the one that holds at both primes, and is
+the one the corollary's proof uses; pointwise monotonicity is only ever a
+sufficient special case (Corollary~\ref{cor:nogo}'s statement).
+Distinguishing the two matters, and now has two independent illustrations:
+at both tested primes the sufficient (monotone) condition fails while the
+necessary (OLS) one still holds.
 
 Open direction O15-O1 is accordingly \textbf{partially completed}: verified
-at $q=151$, still open at $q\in\{29,61,101,211\}$.
+at $q=151$ and $q=211$, still open at $q\in\{29,61,101\}$.
 No claim is made here about whether the OLS condition holds at any other
 prime.
 
 \section{Asymptotic Analysis}
 \label{sec:asymptotic}
 
-\subsection{The $q \to \infty$ limit}
+\subsection{The \texorpdfstring{$q \to \infty$}{q to infinity} limit}
 
 In the limit $q \to \infty$, three simplifications occur:
 \begin{enumerate}[label=(\alph*)]
@@ -944,7 +955,7 @@ $\beta_{\mathrm{C2}}^{\mathrm{diag}}
 
 These are algebraic comparisons only; no native conclusion follows from either limit.
 
-\subsection{Finite-$q$ phenomenology}
+\subsection{Finite-\texorpdfstring{$q$}{q} phenomenology}
 
 At accessible primes ($q \leq 211$), the correction terms are
 non-negligible.
@@ -987,7 +998,7 @@ This number has no derived structural interpretation.
 \label{sec:open}
 
 \begin{description}[style=nextline]
-\item[O15-O1 (Block-level redundancy extraction) --- partially completed at $q=151$]
+\item[O15-O1 (Block-level redundancy extraction) --- partially completed at $q=151,211$]
 Compute $\Reff$ from the O12/O13 pipeline outputs, extract
 $\alpha_{\mathrm{dyn}}$, and check whether $\log(1+V_n)$ has non-negative
 OLS slope against $\log n$ over the fitting window (Corollary~\ref{cor:nogo}'s
@@ -997,9 +1008,9 @@ hypothesis), at the five primes
 \]
 This both quantifies the aggregation bias and verifies the hypothesis of
 Corollary~\ref{cor:nogo}; it is the minimal measurement required for either.
-Done at $q=151$ (Section~\ref{sec:q151}): the hypothesis holds there, and
-$\alpha_{\mathrm{dyn}}\leq\dexact$ follows.
-Still open at $q\in\{29,61,101,211\}$; no claim is made about those primes.
+Done at $q=151$ and $q=211$ (Section~\ref{sec:q151}): the hypothesis holds
+at both, and $\alpha_{\mathrm{dyn}}\leq\dexact$ follows at both.
+Still open at $q\in\{29,61,101\}$; no claim is made about those primes.
 
 \item[O15-O2 (Shell growth exponent)]
 The effective growth dimension $D \approx 4$ (Bass--Guivarc'h)
@@ -1045,15 +1056,17 @@ $\log(1+V_n)$ has non-negative OLS slope against $\log n$ over the fitting
 window (in particular whenever $1+V_n$ is non-decreasing there) — a
 condition checkable from stored pipeline data, whose verification at the
 tested primes is open direction~O15-O1.
-This has now been checked at one prime: at $q=151$
-(Section~\ref{sec:q151}), the OLS condition holds ($\alpha_{\mathrm{dyn}}=
-3.9824\leq\dexact=4.2666$) even though the pointwise-monotone special case
-does not, confirming the two conditions are genuinely distinct in practice
-and not merely in principle.
-This is a first finite check, not a general verification: it constrains
-this specific reweighting at this one prime, this block sample, and this
-seed; $q\in\{29,61,101,211\}$ remain open, and no aggregation rule is known
-to supply the missing growth carrier at any prime.
+This has now been checked at two primes: at $q=151$ and $q=211$
+(Section~\ref{sec:q151}), the OLS condition holds at both
+($\alpha_{\mathrm{dyn}}=3.9824\leq\dexact=4.2666$ at $q=151$;
+$\alpha_{\mathrm{dyn}}=3.5466\leq\dexact=3.5885$ at $q=211$) even though the
+pointwise-monotone special case does not, confirming at two independent
+primes that the two conditions are genuinely distinct in practice and not
+merely in principle.
+These are first finite checks, not a general verification: they constrain
+this specific reweighting at these two primes, their block samples, and
+their seeds; $q\in\{29,61,101\}$ remain open, and no aggregation rule is
+known to supply the missing growth carrier at any prime.
 
 The exact native relation is $\Delta r_n=|S_n|\Sigma_n$.
 It places the shell exponent $(D-1)$ additively in the increment law.
@@ -1063,8 +1076,8 @@ square-root equation does not yield the legacy reciprocal expression.
 Thus C1 and C2 are phenomenological diagnostics, not alternative native laws.
 
 The block-level redundancy extraction (O15-O1) is the critical path
-forward, and is now partially complete: done at $q=151$, still open at
-$q\in\{29,61,101,211\}$.
+forward, and is now partially complete: done at $q=151$ and $q=211$,
+still open at $q\in\{29,61,101\}$.
 
 The O-series has traced the chain from obstruction identification
 (O8--O9) through exact measurement (O10--O13), theoretical
@@ -1077,6 +1090,9 @@ The missing object is a native pair-capacity growth carrier, not a reweighting o
 block data~\cite{Beau2026sgn}.
 
 \bibliographystyle{plain}
-      \bibliography{cosmochrony-bibliography}
+\begingroup
+\raggedright
+\bibliography{cosmochrony-bibliography}
+\endgroup
 
 \end{document}
