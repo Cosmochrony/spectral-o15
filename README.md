@@ -2,6 +2,15 @@ This repository contains the source of the **O15** Cosmochrony paper
 *Observable-Class Derivation Mismatch and the Heisenberg Transfer No-Go:
 From Proxy Capacity to Block-Level Span Dynamics*.
 
+**Version 1.16.1.** Adds the first finite verification of open direction O15-O1: at $q=151$,
+the exact identity $R_n^{\mathrm{eff}}=\bar\Sigma_n(1+V_n)$ is confirmed to machine precision
+($7.1\times10^{-15}$), and the checkable OLS-slope condition of Corollary "Aggregation bound"
+holds (slope $0.2842>0$), giving $\alpha_{\mathrm{dyn}}=3.9824\leq\hat\delta_{\mathrm{exact}}=
+4.2666$ at that prime. The pointwise-monotone special case does *not* hold on the same window,
+making this a genuine test of the weaker, actually-required OLS condition, not the stronger
+sufficient one. O15-O1 is now partially completed (verified at $q=151$; still open at
+$q\in\{29,61,101,211\}$), with reproduction code added at `code/`.
+
 **Version 1.16.** The non-equivalence theorem is unchanged. The aggregation result is
 corrected: it now states an exact identity for the natural dynamical weights,
 $R_n^{\mathrm{eff}}=\bar\Sigma_n\cdot(1+V_n)$, and bounds the aggregation exponent
@@ -105,8 +114,11 @@ inter-block variance ratio already reported by O12/O13.
 From this identity, $\alpha_{\mathrm{dyn}} \le \hat\delta_{\mathrm{exact}}$
 follows **whenever $\log(1+V_n)$ has non-negative OLS slope against $\log n$
 over the fitting window** (in particular whenever $1+V_n$ is non-decreasing
-there) — a condition checkable from existing pipeline data, not yet verified
-at the tested primes (open direction O15-O1).
+there) — a condition checkable from existing pipeline data, now verified at
+one of the five tested primes: at $q=151$ the OLS condition holds (slope
+$0.2842$) even though the stronger pointwise-monotone special case does not,
+confirming the two are genuinely distinct (open direction O15-O1, partially
+completed; $q\in\{29,61,101,211\}$ remain open).
 Where it holds, since $\hat\delta_{\mathrm{exact}} < 5.0 \ll 7.4$, this
 specific, physically motivated reweighting cannot reach the target range
 $\delta \in [7.4, 10.6]$.
@@ -162,9 +174,10 @@ What remains conjectural or unverified:
 - a new native growth carrier, or an explicit two-substrate hypothesis
 - any inter-$q$ estimator and its normalisation
 - the coupling of a block observable to relational growth
-- whether the monotonicity condition above actually holds at the tested
-  primes (open direction O15-O1) — until checked, "aggregation alone cannot
-  save the target range" is conditional, not unconditional
+- whether the OLS-slope condition above holds at the four remaining tested
+  primes (open direction O15-O1, partially completed at $q=151$) — until
+  checked at each prime, "aggregation alone cannot save the target range"
+  is conditional there, not unconditional
 
 This distinction is made explicit throughout the paper.
 
@@ -292,8 +305,9 @@ Neither diagnostic is a native Heisenberg growth law.
 
 # Open Directions
 
-1. **Extraction of \(R_n^{\mathrm{eff}}\) (O15-O1)**
-   Quantify the aggregation observable from the existing O12/O13 block data
+1. **Extraction of \(R_n^{\mathrm{eff}}\) (O15-O1) — partially completed**
+   Quantify the aggregation observable from the existing O12/O13 block data.
+   Done at $q=151$; still open at $q\in\{29,61,101,211\}$.
 
 2. **Native growth carrier**
    Construct a Heisenberg process carrying the pair observable
@@ -334,14 +348,29 @@ It does not assume:
 
 # Reproducibility and Numerical Provenance
 
-O15 is a derivation and audit paper: it performs no independent numerical
-computation and has no `code/` directory. Every numerical value used in the
-paper — the fitted exponents $\hat\delta_{\mathrm{exact}}(q)$ and the
-inter-block variance ratios $V_n^{\max}(q)$ — is drawn directly, unmodified,
+O15 is primarily a derivation and audit paper. Every numerical value in
+Table~1 (the fitted exponents $\hat\delta_{\mathrm{exact}}(q)$) and the
+inter-block variance ratios $V_n^{\max}(q)$ is drawn directly, unmodified,
 from O12's and O13's own published, independently reproducible pipelines.
-The one measurement O15 motivates but does not perform — extracting the
-aggregation exponent $\alpha_{\mathrm{dyn}}$ from $R_n^{\mathrm{eff}}$
-(open direction O15-O1) — is explicit future work, not a claimed result.
+
+One measurement O15 motivates — extracting the aggregation exponent
+$\alpha_{\mathrm{dyn}}$ from $R_n^{\mathrm{eff}}$ (open direction O15-O1) —
+has since been performed at one of the five sampled primes:
+
+- `code/o15_o1_nogo_verification.py 151` — reproduces the exact identity
+  check and the OLS-slope condition at $q=151$ (params: `m_block=10,
+  n_max=37, bfs_frac=0.29`, seed `RNG_BASE+151`, deterministic). Takes
+  approximately 35 minutes on a standard machine (BFS truncation at this
+  prime is expensive).
+- `code/spectral_O12.py` — the shared O12/O13 pipeline, vendored into this
+  repository so the script above is self-contained (this repository is
+  separate from O12's and O13's; a script that only works from a sibling
+  checkout is not reproducible from a fresh clone of this repo alone).
+
+The other four sampled primes ($q\in\{29,61,101,211\}$) remain explicit
+future work, not results claimed by this paper. The script accepts any of
+the five as an argument; running it at those primes would close the
+remaining part of O15-O1, but that has not been done here.
 
 ---
 
@@ -350,6 +379,7 @@ aggregation exponent $\alpha_{\mathrm{dyn}}$ from $R_n^{\mathrm{eff}}$
 ```text
 paper/
 ├── out/      # Compiled O15 PDF
+├── code/     # O15-O1 verification script (q=151) and vendored pipeline
 ├── tex/      # LaTeX sources
 └── README.md
 ```

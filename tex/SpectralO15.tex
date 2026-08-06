@@ -216,20 +216,20 @@ block-level measurement needed to quantify aggregation (Section~\ref{sec:discrim
 \subsection{Status of numerical inputs}
 \label{sec:reproducibility}
 
-This paper is a derivation and audit paper: it introduces no independent
-numerical computation and has no accompanying \texttt{code/} directory.
-Every numerical value used here — the fitted exponents $\dexact(q)$ of
-Table~\ref{tab:scenarios} and the inter-block variance ratios
-$V_n^{\max}(q)$ of Remark~\ref{rem:quantitative} — is drawn directly from
-O12's and O13's own published, independently reproducible pipelines and
-benchmark outputs~\cite{Beau2026a16,Beau2026a17}, unmodified.
-The one computation this paper motivates but does not perform — extracting
-the aggregation exponent $\alpha_{\mathrm{dyn}}$ from $\Reff$
-(Definition~\ref{def:Reff}) at the five sampled primes, open direction
-O15-O1 (Section~\ref{sec:discrimination}) — is explicit future work, not a
-result claimed by the present paper, and requires no new pipeline beyond
-storing an intermediate quantity ($\Delta r_n^{(c)}$) the existing O12/O13
-code already computes.
+This paper is primarily a derivation and audit paper.
+Every numerical value in Table~\ref{tab:scenarios} (the fitted exponents
+$\dexact(q)$) and Remark~\ref{rem:quantitative} (the inter-block variance
+ratios $V_n^{\max}(q)$) is drawn directly from O12's and O13's own
+published, independently reproducible pipelines and benchmark
+outputs~\cite{Beau2026a16,Beau2026a17}, unmodified.
+One computation this paper motivates — extracting the aggregation exponent
+$\alpha_{\mathrm{dyn}}$ from $\Reff$ (Definition~\ref{def:Reff}), open
+direction O15-O1 (Section~\ref{sec:discrimination}) — has since been
+performed at one of the five sampled primes ($q=151$,
+Section~\ref{sec:q151}), with reproduction code and its exact parameters,
+seed, and output in \texttt{code/o15\_o1\_nogo\_verification.py}.
+The other four primes remain explicit future work, not results claimed by
+this paper.
 
 \section{Audit of the O3--O7 Derivation Chain}
 \label{sec:audit}
@@ -639,7 +639,8 @@ $V_n$ — a finer-grained quantity than the peak value $V_n^{\max}$ already
 reported in O12/O13 (Remark~\ref{rem:quantitative}) — using the
 $\Delta r_n^{(c)}$ values the existing pipeline already computes and stores;
 verifying it at the tested primes is exactly open direction~O15-O1
-(Section~\ref{sec:discrimination}), not yet performed here.
+(Section~\ref{sec:discrimination}), performed here at $q=151$ only
+(Section~\ref{sec:q151}), where it holds.
 Since $\dexact < 5.0 \ll 7.4$ at every tested prime, this weighted
 aggregation observable cannot reach the target window $[7.4, 10.6]$ at any
 prime where the condition is confirmed to hold.
@@ -674,8 +675,11 @@ This is the sharpest negative result the paper can currently support for
 O15's own dynamical weight choice: it eliminates ``better averaging of the
 blocks, with weights concentrated on the highest-rank blocks,'' the natural
 reweighting the growth equation motivates, as a route to the target window,
-conditional on the checkable monotonicity condition above, whose
-verification at the tested primes is open direction~O15-O1.
+conditional on the checkable OLS-slope condition above (of which pointwise
+monotonicity is only a sufficient special case), whose verification at the
+tested primes is open direction~O15-O1 --- done at $q=151$
+(Section~\ref{sec:q151}), where the condition holds, still open at the
+other four tested primes.
 It does not, in its present form, rule out every conceivable non-negative
 reweighting.
 Any future resolution requires a new growth carrier or an explicitly stated
@@ -881,6 +885,43 @@ Step~(i) is immediately feasible from existing O12/O13 data.
 Steps~(ii)--(v) constitute the minimal computational programme for resolving the aggregation
 observable; they do not restore the transfer.
 
+\subsection{First finite verification, at $q=151$}
+\label{sec:q151}
+
+Steps (i)--(iv) have been carried out at a single prime, $q=151$, using
+$m_{\mathrm{block}}=10$ blocks, $n_{\mathrm{max}}=37$, BFS truncation
+fraction $0.29$, and seed $\texttt{RNG\_BASE}+q$
+(\texttt{code/o15\_o1\_nogo\_verification.py 151}).
+This is a first finite check, not a universal validation: the result below
+holds for this prime, this block sample, and this seed, and is reported as
+such.
+
+The exact identity of Proposition~\ref{prop:exact-identity} is confirmed to
+machine precision: $\max_n|\Reff-\Sn(1+V_n)| = 7.1\times10^{-15}$.
+Over the fitting window, the OLS slope of $\log(1+V_n)$ against $\log n$ ---
+Corollary~\ref{cor:nogo}'s hypothesis --- is $0.2842$, positive, so the
+hypothesis holds at this prime and this corollary applies:
+$\alpha_{\mathrm{dyn}}=3.9824 \leq \dexact=4.2666$, consistent with the
+corollary's conclusion.
+
+This is a genuinely weaker check than the corollary's stated sufficient
+condition: $1+V_n$ is \emph{not} pointwise non-decreasing on this window
+($V_n$ values $0.1134, 0.1237, 0.2413, 0.3625, 0.2948, 0.3855, 0.4931,
+0.6529, 0.6327, 0.4793$, which dips at two points).
+The necessary condition Corollary~\ref{cor:nogo} actually requires ---
+non-negative covariance of $\log n$ with $\log(1+V_n)$, equivalently
+non-negative OLS slope --- is the one that holds here, and is the one the
+corollary's proof uses; pointwise monotonicity is only ever a sufficient
+special case (Corollary~\ref{cor:nogo}'s statement).
+Distinguishing the two matters: a future prime could fail the sufficient
+(monotone) condition while still satisfying the necessary (OLS) one, as
+happens here.
+
+Open direction O15-O1 is accordingly \textbf{partially completed}: verified
+at $q=151$, still open at $q\in\{29,61,101,211\}$.
+No claim is made here about whether the OLS condition holds at any other
+prime.
+
 \section{Asymptotic Analysis}
 \label{sec:asymptotic}
 
@@ -946,7 +987,7 @@ This number has no derived structural interpretation.
 \label{sec:open}
 
 \begin{description}[style=nextline]
-\item[O15-O1 (Block-level redundancy extraction)]
+\item[O15-O1 (Block-level redundancy extraction) --- partially completed at $q=151$]
 Compute $\Reff$ from the O12/O13 pipeline outputs, extract
 $\alpha_{\mathrm{dyn}}$, and check whether $\log(1+V_n)$ has non-negative
 OLS slope against $\log n$ over the fitting window (Corollary~\ref{cor:nogo}'s
@@ -956,6 +997,9 @@ hypothesis), at the five primes
 \]
 This both quantifies the aggregation bias and verifies the hypothesis of
 Corollary~\ref{cor:nogo}; it is the minimal measurement required for either.
+Done at $q=151$ (Section~\ref{sec:q151}): the hypothesis holds there, and
+$\alpha_{\mathrm{dyn}}\leq\dexact$ follows.
+Still open at $q\in\{29,61,101,211\}$; no claim is made about those primes.
 
 \item[O15-O2 (Shell growth exponent)]
 The effective growth dimension $D \approx 4$ (Bass--Guivarc'h)
@@ -1000,11 +1044,16 @@ $\alpha_{\mathrm{dyn}}\leq\dexact$ for this reweighting whenever
 $\log(1+V_n)$ has non-negative OLS slope against $\log n$ over the fitting
 window (in particular whenever $1+V_n$ is non-decreasing there) — a
 condition checkable from stored pipeline data, whose verification at the
-tested primes is open direction~O15-O1 — so this specific, physically
-motivated reweighting is constrained, subject to that check, from raising
-the aggregation exponent
-into the target window there.
-No aggregation rule is known to supply the missing growth carrier.
+tested primes is open direction~O15-O1.
+This has now been checked at one prime: at $q=151$
+(Section~\ref{sec:q151}), the OLS condition holds ($\alpha_{\mathrm{dyn}}=
+3.9824\leq\dexact=4.2666$) even though the pointwise-monotone special case
+does not, confirming the two conditions are genuinely distinct in practice
+and not merely in principle.
+This is a first finite check, not a general verification: it constrains
+this specific reweighting at this one prime, this block sample, and this
+seed; $q\in\{29,61,101,211\}$ remain open, and no aggregation rule is known
+to supply the missing growth carrier at any prime.
 
 The exact native relation is $\Delta r_n=|S_n|\Sigma_n$.
 It places the shell exponent $(D-1)$ additively in the increment law.
@@ -1013,11 +1062,9 @@ Proposition~\ref{hyp:growthexact} further shows that even the explicitly transpl
 square-root equation does not yield the legacy reciprocal expression.
 Thus C1 and C2 are phenomenological diagnostics, not alternative native laws.
 
-The minimal next step is the block-level redundancy extraction
-(O15-O1): computing $\Reff$ from existing O12/O13 data to measure
-$\alpha_{\mathrm{dyn}}$ directly and quantify the aggregation bias.
-This measurement is feasible with the current pipeline outputs and
-constitutes the critical path forward.
+The block-level redundancy extraction (O15-O1) is the critical path
+forward, and is now partially complete: done at $q=151$, still open at
+$q\in\{29,61,101,211\}$.
 
 The O-series has traced the chain from obstruction identification
 (O8--O9) through exact measurement (O10--O13), theoretical
