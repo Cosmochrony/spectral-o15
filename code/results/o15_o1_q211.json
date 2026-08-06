@@ -14,18 +14,6 @@
   "n_shells": 51,
   "total_elapsed_s": 7260.6,
   "bfs_elapsed_s": 1.4,
-  "block_times_s": [
-    214.0,
-    1845.9,
-    1920.1,
-    31.6,
-    23.4,
-    70.2,
-    816.4,
-    1138.9,
-    1161.4,
-    38.6
-  ],
   "max_abs_residual_identity": 3.553e-15,
   "delta_hat": 3.5885,
   "alpha_dyn": 3.5466,
@@ -46,5 +34,5 @@
   "one_plus_Vn_pointwise_nondecreasing": false,
   "ols_slope_log1pVn_vs_logn": 0.0419,
   "ols_slope_nonnegative": true,
-  "provenance_note": "Values transcribed from the exact console output of a run performed by J. Beau (not this session), using the same o15_o1_nogo_verification.py logic (script vendored from quantum-structure/complex-carrier-selection/code/verify_o15_nogo_single.py, identical computation, cosmetic-only differences -- diffed against the vendored copy at commit time). Reported at the script's own print precision (delta_hat/alpha_dyn/ols_slope to 4 decimals, residual in scientific notation); no additional digits are fabricated. block_times_s are derived by differencing the run's cumulative elapsed-time printouts, not independently timed."
+  "provenance_note": "Values transcribed from the exact console output of a run performed by J. Beau (not this session), using the same o15_o1_nogo_verification.py logic (script vendored from quantum-structure/complex-carrier-selection/code/verify_o15_nogo_single.py, identical computation, cosmetic-only differences -- diffed against the vendored copy at commit time). Reported at the script's own print precision (delta_hat/alpha_dyn/ols_slope to 4 decimals, residual in scientific notation); no additional digits are fabricated. total_elapsed_s and bfs_elapsed_s are direct transcriptions of the run's own printed values. Per-block timings are not included here: they carry no scientific result, and reconstructing them by differencing the run's cumulative-elapsed printouts introduced a small (~1.3s, 0.02%) internal inconsistency against total_elapsed_s -- immaterial to any claim in this repository, but not worth retaining an approximate, non-reproduced figure for."
 }
