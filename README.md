@@ -2,16 +2,22 @@ This repository contains the source of the **O15** Cosmochrony paper
 *Observable-Class Derivation Mismatch and the Heisenberg Transfer No-Go:
 From Proxy Capacity to Block-Level Span Dynamics*.
 
-**Version 1.15.2.** The non-equivalence theorem and aggregation no-go are unchanged.
-This version makes the stronger conclusion explicit: the native Heisenberg identity is
+**Version 1.16.** The non-equivalence theorem is unchanged. The aggregation result is
+corrected: it now states an exact identity for the natural dynamical weights,
+$R_n^{\mathrm{eff}}=\bar\Sigma_n\cdot(1+V_n)$, and bounds the aggregation exponent
+conditionally on a checkable monotonicity criterion, rather than for arbitrary weights.
+Provenance errors in the numeric table and the inter-block variance attribution are
+fixed, and block notation now matches the actual O12/O13 pipeline (generic triples,
+sampled finite sets) throughout. The native Heisenberg identity remains
 $\Delta r_n=|S_n|\Sigma_n$, whereas the Born--Infeld square-root factor belongs to the LPS
-model. The legacy C1/C2 formulas are phenomenological diagnostics, not native growth laws.
+model. The legacy C1/C2 formulas remain phenomenological diagnostics, not native growth laws.
 
 This work extends the **spectral admissibility sub-programme** by auditing the
 derivation chain **O3–O7** in light of the exact Weil-block results of **O12–O14**.
 
-While **O14** established that the exact observable does not satisfy the proxy-level
-relation between the capacity exponent and the cascade exponent, it still left open
+**O13** established, and **O12**'s independent corrective revision confirms analytically,
+that the exact observable does not satisfy the proxy-level relation between the capacity
+exponent and the cascade exponent as a finite-size artefact. This still left open
 a crucial question: **where exactly does the derivation fail?**
 
 The present work answers that question.
@@ -40,7 +46,7 @@ The main logical result is a **non-transferability theorem**:
 - the exponent
   $\hat\delta_{\mathrm{exact}}$
   extracted from the block mean
-  $\bar\Sigma_n = \frac{1}{q-1}\sum_c \Sigma_n^{(c)}$
+  $\bar\Sigma_n = \frac{1}{|\mathcal{C}_{\mathrm{gen}}|}\sum_{c\in\mathcal{C}_{\mathrm{gen}}} \Sigma_n^{(c)}$
   is **not**, in general, the exponent controlling the dynamic growth law of \(p(n)\)
 
 Thus the O7 chain
@@ -82,31 +88,36 @@ So the issue is not a mathematical error in O3–O7, but a **domain-of-validity 
 ## 2. Non-equivalence of observables
 
 The paper proves that the exact observable
-$\bar\Sigma_n = \frac{1}{q-1}\sum_c \Sigma_n^{(c)}$
+$\bar\Sigma_n = \frac{1}{|\mathcal{C}_{\mathrm{gen}}|}\sum_{c\in\mathcal{C}_{\mathrm{gen}}} \Sigma_n^{(c)}$
 cannot be identified with the scalar redundancy observable entering the O6 growth law.
 
 This establishes that:
 - \(\hat\delta_{\mathrm{exact}}\) is a **measured block-mean exponent**
 - it is not a scalar exponent that may be inserted into the O6 growth equation
 
-## 3. Aggregation no-go
+## 3. Aggregation bound for the natural dynamical weights
 
-A new formal no-go result shows that **no choice of non-negative block weights**
-can produce an aggregation exponent larger than the measured exact exponent.
+The natural block-weighted redundancy $R_n^{\mathrm{eff}}$ (Definition, weights
+proportional to $\Delta r_n^{(c)}$) satisfies an **exact identity**:
+$R_n^{\mathrm{eff}} = \bar\Sigma_n\cdot(1+V_n)$, where $V_n$ is exactly the
+inter-block variance ratio already reported by O12/O13.
 
-If
-$\hat\delta_{\mathrm{exact}} < 5.0,$
-then any block-weighted aggregation still satisfies
-$\alpha_{\mathrm{dyn}} \le \hat\delta_{\mathrm{exact}} < 5.0,$
-which is far below the target range
-$\delta \in [7.4, 10.6].$
+From this identity, $\alpha_{\mathrm{dyn}} \le \hat\delta_{\mathrm{exact}}$
+follows **whenever $\log(1+V_n)$ has non-negative OLS slope against $\log n$
+over the fitting window** (in particular whenever $1+V_n$ is non-decreasing
+there) — a condition checkable from existing pipeline data, not yet verified
+at the tested primes (open direction O15-O1).
+Where it holds, since $\hat\delta_{\mathrm{exact}} < 5.0 \ll 7.4$, this
+specific, physically motivated reweighting cannot reach the target range
+$\delta \in [7.4, 10.6]$.
 
-This eliminates the entire class of explanations based on:
-- better averaging
-- better weighting
-- better block statistics
-
-The tension cannot be resolved by aggregation alone.
+This is narrower than an earlier version of this result, which claimed the
+bound for *any* non-negative block weights. That stronger claim is false:
+weights that concentrate mass asymmetrically across the fitting window can
+produce $\alpha_{\mathrm{dyn}} > \hat\delta_{\mathrm{exact}}$. The corrected,
+checkable statement covers the one weighting scheme the growth equation
+actually motivates — "concentrate weight on the highest-rank blocks" — not
+every conceivable reweighting.
 
 ---
 
@@ -140,13 +151,20 @@ What is rigorously established:
 
 - the scalar O6 law does not transfer
 - no native pair-capacity growth carrier is defined
-- aggregation alone cannot save the target range
+- the natural dynamical reweighting satisfies an exact identity,
+  $R_n^{\mathrm{eff}}=\bar\Sigma_n\cdot(1+V_n)$, bounding its exponent by
+  $\hat\delta_{\mathrm{exact}}$ whenever $\log(1+V_n)$ has non-negative OLS
+  slope against $\log n$ over the fitting window (in particular whenever
+  $1+V_n$ is non-decreasing there)
 
-What remains conjectural:
+What remains conjectural or unverified:
 
 - a new native growth carrier, or an explicit two-substrate hypothesis
 - any inter-$q$ estimator and its normalisation
 - the coupling of a block observable to relational growth
+- whether the monotonicity condition above actually holds at the tested
+  primes (open direction O15-O1) — until checked, "aggregation alone cannot
+  save the target range" is conditional, not unconditional
 
 This distinction is made explicit throughout the paper.
 
@@ -200,7 +218,8 @@ O15 introduces several key advances:
 
 - a full **audit of the O3–O7 derivation chain**
 - a precise theorem on **non-transferability of the scalar proxy derivation**
-- a formal **aggregation no-go**
+- an exact identity for the natural block-weighted redundancy and a
+  **conditional aggregation bound** for it
 - a strict hierarchy of exponents and correction terms
 - an explicit separation between:
     - **proved statements**
@@ -310,6 +329,19 @@ It does not assume:
 - that block averaging can recover the target
 - that \(\hat\delta_{\mathrm{exact}}\) is an exponent entering a native growth equation
 - that the remaining tension is merely numerical
+
+---
+
+# Reproducibility and Numerical Provenance
+
+O15 is a derivation and audit paper: it performs no independent numerical
+computation and has no `code/` directory. Every numerical value used in the
+paper — the fitted exponents $\hat\delta_{\mathrm{exact}}(q)$ and the
+inter-block variance ratios $V_n^{\max}(q)$ — is drawn directly, unmodified,
+from O12's and O13's own published, independently reproducible pipelines.
+The one measurement O15 motivates but does not perform — extracting the
+aggregation exponent $\alpha_{\mathrm{dyn}}$ from $R_n^{\mathrm{eff}}$
+(open direction O15-O1) — is explicit future work, not a claimed result.
 
 ---
 
