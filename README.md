@@ -103,9 +103,10 @@ $R_n^{\mathrm{eff}} = \bar\Sigma_n\cdot(1+V_n)$, where $V_n$ is exactly the
 inter-block variance ratio already reported by O12/O13.
 
 From this identity, $\alpha_{\mathrm{dyn}} \le \hat\delta_{\mathrm{exact}}$
-follows **whenever $1+V_n$ is non-decreasing over the fitting window** — a
-condition checkable from existing pipeline data, not yet verified at the
-tested primes (open direction O15-O1).
+follows **whenever $\log(1+V_n)$ has non-negative OLS slope against $\log n$
+over the fitting window** (in particular whenever $1+V_n$ is non-decreasing
+there) — a condition checkable from existing pipeline data, not yet verified
+at the tested primes (open direction O15-O1).
 Where it holds, since $\hat\delta_{\mathrm{exact}} < 5.0 \ll 7.4$, this
 specific, physically motivated reweighting cannot reach the target range
 $\delta \in [7.4, 10.6]$.
@@ -152,8 +153,9 @@ What is rigorously established:
 - no native pair-capacity growth carrier is defined
 - the natural dynamical reweighting satisfies an exact identity,
   $R_n^{\mathrm{eff}}=\bar\Sigma_n\cdot(1+V_n)$, bounding its exponent by
-  $\hat\delta_{\mathrm{exact}}$ whenever $1+V_n$ is non-decreasing over the
-  fitting window
+  $\hat\delta_{\mathrm{exact}}$ whenever $\log(1+V_n)$ has non-negative OLS
+  slope against $\log n$ over the fitting window (in particular whenever
+  $1+V_n$ is non-decreasing there)
 
 What remains conjectural or unverified:
 
