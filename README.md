@@ -2,10 +2,15 @@ This repository contains the source of the **O15** Cosmochrony paper
 *Observable-Class Derivation Mismatch and the Heisenberg Transfer No-Go:
 From Proxy Capacity to Block-Level Span Dynamics*.
 
-**Version 1.15.2.** The non-equivalence theorem and aggregation no-go are unchanged.
-This version makes the stronger conclusion explicit: the native Heisenberg identity is
+**Version 1.16.** The non-equivalence theorem is unchanged. The aggregation result is
+corrected: it now states an exact identity for the natural dynamical weights,
+$R_n^{\mathrm{eff}}=\bar\Sigma_n\cdot(1+V_n)$, and bounds the aggregation exponent
+conditionally on a checkable monotonicity criterion, rather than for arbitrary weights.
+Provenance errors in the numeric table and the inter-block variance attribution are
+fixed, and block notation now matches the actual O12/O13 pipeline (generic triples,
+sampled finite sets) throughout. The native Heisenberg identity remains
 $\Delta r_n=|S_n|\Sigma_n$, whereas the Born--Infeld square-root factor belongs to the LPS
-model. The legacy C1/C2 formulas are phenomenological diagnostics, not native growth laws.
+model. The legacy C1/C2 formulas remain phenomenological diagnostics, not native growth laws.
 
 This work extends the **spectral admissibility sub-programme** by auditing the
 derivation chain **O3–O7** in light of the exact Weil-block results of **O12–O14**.
@@ -90,24 +95,28 @@ This establishes that:
 - \(\hat\delta_{\mathrm{exact}}\) is a **measured block-mean exponent**
 - it is not a scalar exponent that may be inserted into the O6 growth equation
 
-## 3. Aggregation no-go
+## 3. Aggregation bound for the natural dynamical weights
 
-A new formal no-go result shows that **no choice of non-negative block weights**
-can produce an aggregation exponent larger than the measured exact exponent.
+The natural block-weighted redundancy $R_n^{\mathrm{eff}}$ (Definition, weights
+proportional to $\Delta r_n^{(c)}$) satisfies an **exact identity**:
+$R_n^{\mathrm{eff}} = \bar\Sigma_n\cdot(1+V_n)$, where $V_n$ is exactly the
+inter-block variance ratio already reported by O12/O13.
 
-If
-$\hat\delta_{\mathrm{exact}} < 5.0,$
-then any block-weighted aggregation still satisfies
-$\alpha_{\mathrm{dyn}} \le \hat\delta_{\mathrm{exact}} < 5.0,$
-which is far below the target range
-$\delta \in [7.4, 10.6].$
+From this identity, $\alpha_{\mathrm{dyn}} \le \hat\delta_{\mathrm{exact}}$
+follows **whenever $1+V_n$ is non-decreasing over the fitting window** — a
+condition checkable from existing pipeline data, not yet verified at the
+tested primes (open direction O15-O1).
+Where it holds, since $\hat\delta_{\mathrm{exact}} < 5.0 \ll 7.4$, this
+specific, physically motivated reweighting cannot reach the target range
+$\delta \in [7.4, 10.6]$.
 
-This eliminates the entire class of explanations based on:
-- better averaging
-- better weighting
-- better block statistics
-
-The tension cannot be resolved by aggregation alone.
+This is narrower than an earlier version of this result, which claimed the
+bound for *any* non-negative block weights. That stronger claim is false:
+weights that concentrate mass asymmetrically across the fitting window can
+produce $\alpha_{\mathrm{dyn}} > \hat\delta_{\mathrm{exact}}$. The corrected,
+checkable statement covers the one weighting scheme the growth equation
+actually motivates — "concentrate weight on the highest-rank blocks" — not
+every conceivable reweighting.
 
 ---
 
@@ -141,13 +150,19 @@ What is rigorously established:
 
 - the scalar O6 law does not transfer
 - no native pair-capacity growth carrier is defined
-- aggregation alone cannot save the target range
+- the natural dynamical reweighting satisfies an exact identity,
+  $R_n^{\mathrm{eff}}=\bar\Sigma_n\cdot(1+V_n)$, bounding its exponent by
+  $\hat\delta_{\mathrm{exact}}$ whenever $1+V_n$ is non-decreasing over the
+  fitting window
 
-What remains conjectural:
+What remains conjectural or unverified:
 
 - a new native growth carrier, or an explicit two-substrate hypothesis
 - any inter-$q$ estimator and its normalisation
 - the coupling of a block observable to relational growth
+- whether the monotonicity condition above actually holds at the tested
+  primes (open direction O15-O1) — until checked, "aggregation alone cannot
+  save the target range" is conditional, not unconditional
 
 This distinction is made explicit throughout the paper.
 
@@ -201,7 +216,8 @@ O15 introduces several key advances:
 
 - a full **audit of the O3–O7 derivation chain**
 - a precise theorem on **non-transferability of the scalar proxy derivation**
-- a formal **aggregation no-go**
+- an exact identity for the natural block-weighted redundancy and a
+  **conditional aggregation bound** for it
 - a strict hierarchy of exponents and correction terms
 - an explicit separation between:
     - **proved statements**

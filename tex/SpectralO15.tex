@@ -36,7 +36,7 @@
 From Proxy Capacity to Block-Level Span Dynamics}
 \author{J\'er\^ome Beau\\
 \small Independent Researcher, France; jerome.beau@cosmochrony.org}
-\date{2026\\Version 1.15.2}
+\date{2026\\Version 1.16}
 
 \begin{document}
 \maketitle
@@ -65,8 +65,14 @@ each of internal dimension~$q$.
 We prove a non-equivalence theorem establishing that the block-averaged
 exponent $\dexact$ does not, in general, coincide with the scalar exponent~$\alpha$
 entering the growth equation.
-We define an effective block-weighted redundancy $\Reff$ and show that its exponent cannot
-repair the gap by aggregation alone.
+We define an effective block-weighted redundancy $\Reff$, prove it satisfies
+the exact identity $\Reff=\Sn\cdot(1+V_n)$ for the natural dynamical weights
+(where $V_n$ is the inter-block variance ratio already reported in O12/O13),
+and show this bounds the aggregation exponent by $\dexact$ whenever $1+V_n$
+is non-decreasing over the fitting window, a condition checkable from
+existing pipeline data, so this specific, motivated reweighting is
+constrained, subject to that check, from repairing the gap by aggregation
+alone.
 The native identity is instead
 $\Delta r_n=|S_n|\Sigma_n\asymp \Sigma_n n^{D-1}$.
 Neither the Born--Infeld factor $c_{\mathrm{BI}}\sqrt{p}$ nor the changing LPS valence has a
@@ -105,7 +111,8 @@ cascade exponent, spectral admissibility.
       Power-law fit of the weighted observable
       $\Reff \sim B\,n^{-\alpha_{\mathrm{dyn}}}$
       (Definition~\ref{def:alphaeff}).
-      Satisfies $\alpha_{\mathrm{dyn}} \leq \dexact$
+      Satisfies $\alpha_{\mathrm{dyn}} \leq \dexact$ whenever $1+V_n$ is
+      non-decreasing over the fitting window
       (Corollary~\ref{cor:nogo}). \\[4pt]
       $\deff$ & legacy endpoint diagnostic (C1) &
       Historical redefinition combining shell growth and an endpoint
@@ -453,12 +460,12 @@ term depends on the relative \emph{amplitude} variance $V_A$, a distinct
 quantity from $V_n^{\max}$ (a variance of $\Sigma_n^{(c)}$ itself) that is
 not directly reported by O12/O13, and estimating $V_A$ from $V_n^{\max}$
 without further computation would not be rigorous.
-This is immaterial to the paper's conclusion: Corollary~\ref{cor:nogo} below
-proves unconditionally, for \emph{any} relative amplitude variance and any
-choice of non-negative weights, that no aggregation can push the exponent
-above $\dexact$ itself — so the exact size of the non-equivalence bias does
-not need to be pinned down to establish that it cannot bridge the deficit
-to $\delta\in[7.4,10.6]$.
+The quantity actually needed downstream is not $V_A$ but $V_n^{\max}$ itself:
+Proposition~\ref{prop:exact-identity} below shows the natural dynamical
+reweighting $\Reff$ satisfies the exact identity $\Reff=\Sn\cdot(1+V_n)$,
+with $V_n$ exactly the inter-block variance ratio reported here — so the
+data already quoted in this remark is precisely what Corollary~\ref{cor:nogo}
+needs, with no separate $V_A$ estimate required for that route.
 \end{remark}
 
 \subsection{Consequence for the growth equation}
@@ -579,50 +586,91 @@ power-law fit $\Reff \sim B \, n^{-\alpha_{\mathrm{dyn}}}$ over the
 pre-saturation window.
 \end{definition}
 
-By Proposition~\ref{prop:relation} and Remark~\ref{rem:sign},
-$\alpha_{\mathrm{dyn}} \leq \dexact$: the aggregation exponent is
-smaller than or equal to the unweighted block-average exponent.
+By Proposition~\ref{prop:relation} and Remark~\ref{rem:sign}, $\Reff\geq\Sn$
+pointwise in~$n$ (since the covariance is non-negative).
+A pointwise inequality between two curves does \emph{not} by itself bound
+their fitted power-law exponents — a curve lying everywhere above another
+can still decay faster (e.g.\ $100n^{-5}\geq n^{-3}$ on $[2,10]$) — so this
+alone does not give $\alpha_{\mathrm{dyn}}\leq\dexact$.
+The correct route is the exact identity below.
 
-\begin{corollary}[Aggregation no-go]
+\begin{proposition}[Exact identity for the dynamical weights]
+\label{prop:exact-identity}
+For the specific weights $w_c(n)$ of Definition~\ref{def:Reff},
+\begin{equation}
+\label{eq:exact-identity}
+\Reff = \Sn \cdot (1 + V_n), \qquad
+V_n := \frac{\mathrm{Var}_c(\Sigma_n^{(c)})}{\Sn^2},
+\end{equation}
+where $V_n$ is exactly the inter-block variance ratio of condition~(E2),
+reported as $V_n^{\max}$ in O12/O13 (Remark~\ref{rem:quantitative}).
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:Reff},
+$\Reff = \sum_c w_c\Sigma_n^{(c)}
+= \frac{1}{|S_n|}\cdot\frac{\sum_c \Delta r_n^{(c)}\cdot\Delta r_n^{(c)}}{\sum_c\Delta r_n^{(c)}}
+= \frac{1}{|S_n|}\cdot\frac{\mathbb{E}_c[\Delta r_n^{(c)2}]}{\mathbb{E}_c[\Delta r_n^{(c)}]}$.
+Writing $\mathbb{E}_c[\Delta r_n^{(c)2}] = \mathrm{Var}_c(\Delta r_n^{(c)}) + \mathbb{E}_c[\Delta r_n^{(c)}]^2$,
+\[
+\Reff = \frac{\mathbb{E}_c[\Delta r_n^{(c)}]}{|S_n|}
+\left(1+\frac{\mathrm{Var}_c(\Delta r_n^{(c)})}{\mathbb{E}_c[\Delta r_n^{(c)}]^2}\right)
+= \Sn\cdot(1+V_n),
+\]
+using $\Sn = \mathbb{E}_c[\Delta r_n^{(c)}]/|S_n|$ and
+$\mathrm{Var}_c(\Delta r_n^{(c)})/\mathbb{E}_c[\Delta r_n^{(c)}]^2
+= \mathrm{Var}_c(\Sigma_n^{(c)})/\Sn^2$, since $|S_n|$ is common to every
+block at fixed~$n$ and cancels in the ratio.
+\end{proof}
+
+\begin{corollary}[Aggregation bound for the dynamical weights]
 \label{cor:nogo}
-No choice of dynamical weights $w_c(n)$ satisfying $w_c \geq 0$
-and $\sum_c w_c = 1$ can produce
-$\alpha_{\mathrm{dyn}} > \dexact$.
-In particular, the block-averaged exponent $\dexact \in [3.6, 4.8]$
-measured in O12--O13 is an \emph{upper bound} on the decay exponent
-of the block-weighted aggregation observable.
-Since $\dexact < 5.0 \ll 7.4$, no aggregation or reweighting
-of the existing block-level data can bring that aggregation
-exponent into the target window $[7.4, 10.6]$.
+For the specific weights $w_c(n)$ of Definition~\ref{def:Reff},
+$\alpha_{\mathrm{dyn}} \leq \dexact$ holds whenever $1+V_n$ is non-decreasing
+over the fitting window $[n_0,n_1]$.
+This condition is directly checkable from the per-shell inter-block variance
+$V_n$ — a finer-grained quantity than the peak value $V_n^{\max}$ already
+reported in O12/O13 (Remark~\ref{rem:quantitative}) — using the
+$\Delta r_n^{(c)}$ values the existing pipeline already computes and stores;
+verifying it at the tested primes is exactly open direction~O15-O1
+(Section~\ref{sec:discrimination}), not yet performed here.
+Since $\dexact < 5.0 \ll 7.4$ at every tested prime, this weighted
+aggregation observable cannot reach the target window $[7.4, 10.6]$ at any
+prime where the condition is confirmed to hold.
+This restricted, verifiable statement replaces an earlier, incorrect claim
+that no choice of non-negative weights whatsoever could exceed $\dexact$:
+that stronger claim is false — weights concentrating mass asymmetrically
+across the window (all mass on the largest surviving block below the
+window's log-midpoint, all mass on the smallest surviving block above it)
+satisfy $w_c\geq0$, $\sum_c w_c=1$, and can produce
+$\alpha_{\mathrm{dyn}}>\dexact$.
 \end{corollary}
 
 \begin{proof}
-At fixed BFS depth~$n$, the shell size $|S_n|$ is common to all blocks.
-Therefore $\Sigma_n^{(c)} = \Delta r_n^{(c)} / |S_n|$ is a monotone
-increasing function of $\Delta r_n^{(c)}$ alone.
-The weight $w_c = \Delta r_n^{(c)} / \sum_{c'} \Delta r_n^{(c')}$
-is likewise a monotone increasing function of the same variable
-$\Delta r_n^{(c)}$.
-Since both $w_c$ and $\Sigma_n^{(c)}$ are monotone increasing functions
-of a single common variable, the Chebyshev sum inequality gives
-\[
-\sum_c w_c \, \Sigma_n^{(c)}
-\;\geq\;
-\left(\sum_c w_c\right)
-\left(\frac{1}{|\mathcal{C}_{\mathrm{gen}}|} \sum_c \Sigma_n^{(c)}\right)
-= \Sn,
-\]
-so $\Reff \geq \Sn$ pointwise in~$n$.
-A pointwise lower bound on the observable translates into an upper
-bound on the decay exponent: $\alpha_{\mathrm{dyn}} \leq \dexact$.
+Write $\log\Reff(n) = \log\Sn(n) + g(n)$, $g(n):=\log(1+V_n)$, by
+Proposition~\ref{prop:exact-identity}.
+Ordinary least squares is linear in the response for a fixed design, so the
+OLS slope of $\log\Reff$ against $\log n$ over $[n_0,n_1]$ equals the OLS
+slope of $\log\Sn$ against $\log n$ plus the OLS slope of $g$ against
+$\log n$.
+If $g$ is non-decreasing in~$n$ (hence in $\log n$) over the window, its OLS
+slope against the increasing sequence $\log n$ is non-negative, since $g$
+and $\log n$ are then similarly ordered (Chebyshev's sum inequality;
+equivalently, their covariance is non-negative).
+The fitted exponent is minus the OLS slope, so
+$-\alpha_{\mathrm{dyn}} \geq -\dexact$, i.e.\ $\alpha_{\mathrm{dyn}}\leq\dexact$.
 \end{proof}
 
-This is the sharpest negative result of the paper:
-it eliminates the entire class of solutions based on
-``better averaging of the blocks.''
-No refined treatment of the block statistics supplies a native capacity-to-rate bridge.
-Any future resolution requires a new growth carrier or an explicitly stated cross-substrate
-hypothesis.
+This is the sharpest negative result the paper can currently support for
+O15's own dynamical weight choice: it eliminates ``better averaging of the
+blocks, with weights concentrated on the highest-rank blocks,'' the natural
+reweighting the growth equation motivates, as a route to the target window,
+conditional on the checkable monotonicity condition above, whose
+verification at the tested primes is open direction~O15-O1.
+It does not, in its present form, rule out every conceivable non-negative
+reweighting.
+Any future resolution requires a new growth carrier or an explicitly stated
+cross-substrate hypothesis.
 
 \section{Audit of the Transplanted Growth Equation}
 \label{sec:rederivation}
@@ -771,7 +819,7 @@ growth exponent), $(D-1) = 3$, and
 $\log q / \log n^{*} \approx 1$ at $n^{*} \sim q$,
 one obtains $\deff \approx \dexact - 3 + 1 = \dexact - 2$.
 With $\dexact \in [3.6, 4.8]$, this gives
-$\deff \in [1.6, 2.8]$, yielding $\bstar \in [0.26, 0.48]$.
+$\deff \in [1.6, 2.8]$, yielding $\bstar \in [0.30, 0.48]$.
 This is still above the target $(0.09, 0.13)$.
 
 \item[Diagnostic C2: additional denominator term]
@@ -785,7 +833,7 @@ No Heisenberg growth process carrying this term is derived.
 
 For C2 to produce $\bstar \in (0.09, 0.13)$ with
 $\deff \in [1.6, 2.8]$, the correction must satisfy
-$\sigma(q) \in [5.1, 8.6]$, which would require
+$\sigma(q) \in [4.39, 9.01]$, which would require
 $\sigma(q) \sim q^{\kappa}$ for some $\kappa > 0$.
 The numerical value is therefore a target diagnostic, not evidence for a
 representation-theoretic correction.
@@ -832,8 +880,10 @@ observable; they do not restore the transfer.
 In the limit $q \to \infty$, three simplifications occur:
 \begin{enumerate}[label=(\alph*)]
 \item Block universality: $\mathrm{Var}_c(\Sigma_n^{(c)}) \to 0$
-by the O13 variance reduction result~\cite{Beau2026a17},
-so $\Reff \to \Sn$ and $\alpha_{\mathrm{dyn}} \to \dexact$.
+by the O13 variance reduction result~\cite{Beau2026a17}, i.e.\ $V_n\to0$; by
+the exact identity of Proposition~\ref{prop:exact-identity}, this gives
+$\Reff \to \Sn$ and $\alpha_{\mathrm{dyn}} \to \dexact$ rigorously, not only
+heuristically.
 \item The legacy endpoint ratio $\log q / \log n^{*}$ tends to~1 if $n^{*}\sim q$.
 \item The O14 variance ansatz models $\epsilon(q)$ as vanishing under bounded variance.
 \end{enumerate}
@@ -888,12 +938,14 @@ This number has no derived structural interpretation.
 
 \begin{description}[style=nextline]
 \item[O15-O1 (Block-level redundancy extraction)]
-Compute $\Reff$ from the O12/O13 pipeline outputs and extract
-$\alpha_{\mathrm{dyn}}$ at the five primes
+Compute $\Reff$ from the O12/O13 pipeline outputs, extract
+$\alpha_{\mathrm{dyn}}$, and check whether $1+V_n$ is non-decreasing over the
+fitting window, at the five primes
 \[
   q \in \{29,61,101,151,211\}.
 \]
-This is the minimal measurement required to quantify the aggregation bias.
+This both quantifies the aggregation bias and verifies the hypothesis of
+Corollary~\ref{cor:nogo}; it is the minimal measurement required for either.
 
 \item[O15-O2 (Shell growth exponent)]
 The effective growth dimension $D \approx 4$ (Bass--Guivarc'h)
@@ -928,14 +980,19 @@ equation, and that the bias goes in the wrong direction
 (Remark~\ref{rem:bias}).
 
 The effective block-weighted redundancy $\Reff$
-(Definition~\ref{def:Reff}) is a well-defined aggregation observable.
-Its exponent $\alpha_{\mathrm{dyn}}$ is smaller than $\dexact$,
-so the aggregation correction alone cannot resolve the tension.
+(Definition~\ref{def:Reff}) is a well-defined aggregation observable
+satisfying the exact identity $\Reff=\Sn\cdot(1+V_n)$
+(Proposition~\ref{prop:exact-identity}), with $V_n$ exactly O12/O13's own
+reported inter-block variance ratio.
 
-The aggregation no-go (Corollary~\ref{cor:nogo}) is the sharpest
-negative result: no reweighting of the block-level data can raise
-the aggregation exponent into the target window.
-No aggregation rule supplies the missing growth carrier.
+The aggregation bound (Corollary~\ref{cor:nogo}) gives
+$\alpha_{\mathrm{dyn}}\leq\dexact$ for this reweighting whenever $1+V_n$ is
+non-decreasing over the fitting window — a condition checkable from stored
+pipeline data, whose verification at the tested primes is open
+direction~O15-O1 — so this specific, physically motivated reweighting is
+constrained, subject to that check, from raising the aggregation exponent
+into the target window there.
+No aggregation rule is known to supply the missing growth carrier.
 
 The exact native relation is $\Delta r_n=|S_n|\Sigma_n$.
 It places the shell exponent $(D-1)$ additively in the increment law.
