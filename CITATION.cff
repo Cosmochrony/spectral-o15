@@ -4,6 +4,7 @@ title: >-
   Observable-Class Derivation Mismatch and the Heisenberg Transfer No-Go:
   From Proxy Capacity to Block-Level Span Dynamics
 type: software
+version: "1.17"
 authors:
   - family-names: "Beau"
     given-names: "Jérôme"

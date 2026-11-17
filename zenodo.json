@@ -4,5 +4,5 @@
   "main_tex": "tex/SpectralO15.tex",
   "zenodo_id": 19281420,
   "doi": "10.5281/zenodo.19281420",
-  "notes": "Version 1.17 (alpha-1). Withdraws the reciprocal equality as a consequence of O6/O7: O6 proves only a conditional upper growth bound and supplies a countermodel to equality. The historical exponent range does not select the cascade rate. Independent observable, parity, aggregation and crossing-rank results are unchanged; reciprocal numerical values are retained only as explicitly defined legacy diagnostics."
+  "notes": "Version 1.17 (alpha-1). Withdraws the reciprocal equality as a consequence of O6/O7: O6 proves only a conditional upper growth bound and supplies a countermodel to equality. The historical exponent range does not select the cascade rate. The non-equivalence theorem, exact dynamical-weight identity, conditional aggregation bound and recorded finite-prime checks are unchanged. Reciprocal numerical values are retained only as explicitly defined legacy diagnostics."
 }
