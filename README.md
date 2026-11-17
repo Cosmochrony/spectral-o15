@@ -2,6 +2,15 @@ This repository contains the source of the **O15** Cosmochrony paper
 *Observable-Class Derivation Mismatch and the Heisenberg Transfer No-Go:
 From Proxy Capacity to Block-Level Span Dynamics*.
 
+**Version 1.17.** Withdraws the false reciprocal derivation, retaining the conditional O6 upper bound and the
+legacy C1/C2 diagnostics. The non-equivalence theorem, aggregation identity and finite-prime checks are unchanged.
+
+O6 proves only $\beta_{\mathrm{eff}}\leq1/(\alpha+1/2)$ under its effective growth hypothesis
+(G_R) and a power-law redundancy Ansatz in the exploration variable $p$.
+Its countermodel $\alpha=8$, $p=n^{1/17}$ satisfies those premises but refutes equality.
+The reciprocal is retained only as a defined legacy diagnostic; the historical range $[7.4,10.6]$
+is neither a necessary nor a sufficient condition selecting the charged-lepton cascade window.
+
 **Version 1.16.1.** Adds the first finite verifications of open direction O15-O1: at $q=151$
 and $q=211$, the exact identity $R_n^{\mathrm{eff}}=\bar\Sigma_n(1+V_n)$ is confirmed to machine
 precision ($7.1\times10^{-15}$ and $3.6\times10^{-15}$ respectively), and the checkable
@@ -46,10 +55,9 @@ to the exact Weil-block observable measured in O12–O14.
 
 # Core Result
 
-The paper establishes that the structural relation
-$\beta^* = \frac{1}{\delta + \tfrac12}$
-derived in **O6–O7** is conditional on the changing-degree LPS model and
-does **not transfer to the exact-block setting as constituted in the corpus**.
+The former claim that O6/O7 derives $\beta^*=1/(\delta+1/2)$ is withdrawn.
+Calling it conditional on the scalar LPS model does not repair the failed implication.
+The source proves only an upper bound, independently of the additional Heisenberg transfer obstruction.
 
 The main logical result is a **non-transferability theorem**:
 
@@ -83,17 +91,18 @@ The paper proves three central points.
 The derivation is decomposed into its logical steps:
 
 - **O3**: mass hierarchy from exit ranks
-- **O6**: growth-law derivation
+- **O6**: conditional growth-exponent upper bound
 - **O7**: capacity reformulation
 
 The result is:
 
 - **O3 remains valid**
-- **O6 remains valid in its scalar domain**
+- **O6 supplies a conditional upper bound in its scalar domain, with equality refuted under those premises**
 - the failure is localised at the point where a **scalar global observable**
   is implicitly substituted by a **mean over exact Weil blocks**
 
-So the issue is not a mathematical error in O3–O7, but a **domain-of-validity failure**.
+The former equality contains a mathematical implication error already in the scalar setting.
+The scalar-to-block identification is a separate **domain-of-validity failure**.
 
 ## 2. Non-equivalence of observables
 
@@ -272,7 +281,7 @@ What it does resolve is the **location and nature** of the problem.
 
 The paper establishes that:
 
-- the scalar-to-block passage is the actual failure point
+- the upstream equality is withdrawn, independently of the scalar-to-block failure
 - the block aggregation route cannot restore the target range
 - the next step must derive a native carrier on the Heisenberg substrate itself
 
@@ -293,7 +302,7 @@ Two historical diagnostics are retained for traceability:
 The legacy endpoint bookkeeping defines
 $\delta_{\mathrm{eff}},$
 and inserts it into
-$\beta^* = \frac{1}{\delta_{\mathrm{eff}} + \tfrac12}$
+$\beta_{\mathrm{C1}}^{\mathrm{diag}} := \frac{1}{\delta_{\mathrm{eff}} + \tfrac12}$
 as a phenomenological comparison.
 
 ## C2 — Additional denominator term
@@ -331,7 +340,7 @@ Neither diagnostic is a native Heisenberg growth law.
 
 The programme is now:
 
-- free of algebraic obstruction (**O6**)
+- subject to a conditional upper bound, with no selected cascade exponent (**O6**)
 - free of geometric obstruction (**O8–O9**)
 - free of proxy-level representation obstruction (**O10–O11**)
 - exact at the Weil-block level (**O12**)

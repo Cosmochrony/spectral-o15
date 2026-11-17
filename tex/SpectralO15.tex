@@ -37,32 +37,21 @@
 From Proxy Capacity to Block-Level Span Dynamics}
 \author{J\'er\^ome Beau\\
 \small Independent Researcher, France; jerome.beau@cosmochrony.org}
-\date{2026\\Version 1.16.1}
+\date{2026\\Version 1.17}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-The O3--O7 derivation chain proposes, on a changing-degree LPS family, the relation
-$\bstar = 1/(\delta + 1/2)$ linking the capacity decay exponent~$\delta$
-to the cascade growth exponent~$\bstar$ governing charged-lepton mass ratios.
-O13 established that the exact Weil-block capacity exponent
-$\dexact(q) \in [3.6, 4.8]$ does not drift toward the target window
-$\delta \in [7.4, 10.6]$ as $q$ grows, ruling out a finite-size explanation of
-the tension; O12's independent corrective revision derives, in closed form,
-the intrinsic asymptotic value the finite-$q$ fits are converging toward,
-$\delta_{\mathrm{exact}}=3$, confirming this analytically rather than by
-extrapolation, and shows the fitted values carry no central-coordinate
-dependence of any kind.
-The present paper identifies a distinct, independent structural reason —
-unrelated to the central coordinate — that the tension cannot be resolved by
-refining the block-level measurement, and proves a non-transferability
-result:
-the O6 growth equation $\mathrm{d}p/\mathrm{d}n \lesssim \Rn \, c_{\mathrm{BI}} \sqrt{p(n)}$
-derives $\bstar$ from a \emph{scalar global} redundancy functional~$\Rn$,
-whereas the exact observable measured in O12--O13 is a \emph{block-averaged}
-capacity over a finite sampled subset of generic-triple Weil representations,
-each of internal dimension~$q$.
+O6 proves only $\beta_{\mathrm{eff}}\leq1/(\alpha+1/2)$ under an effective growth
+hypothesis and a power-law redundancy Ansatz; its countermodel refutes equality under those premises.
+The reciprocal $1/(\delta+1/2)$ is therefore retained only as a legacy diagnostic.
+The historical range $\delta\in[7.4,10.6]$ neither selects the charged-lepton cascade exponent
+nor follows as its necessary interval.
+O12's exact asymptotic exponent is $\delta_{\mathrm{exact}}=3$; the O13 finite-window values
+are crossover statistics, with no upward drift toward that historical range.
+Independently of the failed equality, the scalar redundancy in O6's effective growth inequality
+and the exact block-averaged Heisenberg capacity need not be identified.
 We prove a non-equivalence theorem establishing that the block-averaged
 exponent $\dexact$ does not, in general, coincide with the scalar exponent~$\alpha$
 entering the growth equation.
@@ -84,6 +73,9 @@ matching in the transplanted equation does not yield the legacy reciprocal formu
 The former C1/C2 outputs are therefore retained only as phenomenological diagnostics.
 Block-level redundancy measurement remains useful for the aggregation question, not as a test
 of a native capacity-to-rate transfer.
+\textbf{Interpretive outlook.}
+An internal capacity statistic and a particle-hierarchy rate remain distinct until their growth
+carrier and rate-selection mechanism are independently supplied.
 \end{abstract}
 
 \smallskip\noindent
@@ -140,7 +132,7 @@ measurement (O10--O13~\cite{Beau2026a14,Beau2026a15,Beau2026a16,Beau2026a17})
 to observable and estimator separation (O14~\cite{Beau2026a18}).
 O13 established, and O12's independent corrective revision confirms
 analytically, that the tension between the exact Weil-block capacity
-exponent $\dexact(q) \in [3.6, 4.8]$ and the phenomenological target
+exponent $\dexact(q) \in [3.6, 4.8]$ and the historical comparison range
 $\delta \in [7.4, 10.6]$ is not a numerical artefact (refuting hypothesis~S1
 of O13); the present paper identifies a distinct structural mismatch
 (Source~S2, Section~\ref{sec:audit}).
@@ -179,17 +171,20 @@ the additional hypotheses a future model would require~\cite{Beau2026sgn}.
 \subsection{The central question}
 \label{sec:central}
 
-The relation $\bstar = 1/(\delta + 1/2)$ was derived conditionally in
-O6~\cite{Beau2026a10} (Proposition~4.2) from the LPS growth equation
+O6~\cite{Beau2026a10}, Proposition~4.2, assumes the effective growth inequality (G$_R$),
 \begin{equation}
 \label{eq:growth}
 \frac{\mathrm{d}p}{\mathrm{d}n}
-\lesssim \Rn \cdot c_{\mathrm{BI}} \sqrt{p(n)},
+\lesssim \Rn\,c_{\mathrm{BI}}\sqrt{p(n)},
 \end{equation}
-where $\Rn$ is a scalar redundancy functional satisfying
-$\Rn \sim p(n)^{-\alpha}$ in the pre-saturation window.
-Separation of variables yields $p(n) \sim n^{1/(\alpha + 1/2)}$,
-giving $\bstar = 1/(\alpha + 1/2)$.
+and $\Rn\sim p(n)^{-\alpha}$ with $\alpha>0$.
+Separation of variables gives $p(n)=O(n^{1/(\alpha+1/2)})$.
+For the reference Ansatz $p(n)\sim n^\beta$, this yields only
+$\beta\leq1/(\alpha+1/2)$, with no lower bound.
+The exact power laws $\alpha=8$, $p(n)=n^{1/17}$ satisfy these premises but have
+$\beta=1/17<2/17$, outside $(0.09,0.13)$.
+Thus the reciprocal equality is refuted under those premises, even in the scalar LPS setting.
+No saturation assumption is added here to restore it.
 
 The question is: \emph{does the fixed-degree Heisenberg cascade supply a native object
 identifiable with~$\Rn$, together with the remaining premises of~\eqref{eq:growth}?}
@@ -235,9 +230,9 @@ this paper.
 \section{Audit of the O3--O7 Derivation Chain}
 \label{sec:audit}
 
-We trace the logical chain that produces $\bstar = 1/(\delta + 1/2)$
-and identify, at each step, the hypotheses that hold for the proxy
-observable but fail for the exact Weil-block observable.
+We audit the former claim $\bstar=1/(\delta+1/2)$ and withdraw it as a consequence of O6/O7.
+We separately identify the observable and growth-carrier hypotheses used in the proxy comparison
+and their failure to transfer to the exact Weil-block setting.
 
 \subsection{Step A: O3 mass formula}
 \label{sec:stepA}
@@ -264,24 +259,24 @@ of the observable-class mismatch and remains valid throughout.
 \subsection{Step B: O6 growth equation}
 \label{sec:stepB}
 
-O6~\cite{Beau2026a10}, Proposition~4.2, derives $\bstar = 1/(\alpha + 1/2)$
-from the growth equation~\eqref{eq:growth}.
-The derivation involves three implicit hypotheses about the
-redundancy functional~$\Rn$:
+O6~\cite{Beau2026a10}, Proposition~4.2, proves only the upper bound
+$\beta_{\mathrm{eff}}\leq1/(\alpha+1/2)$ from the independent effective growth hypothesis
+\eqref{eq:growth} and a power-law redundancy Ansatz.
+The following properties organise the observable comparison; they are not sufficient hypotheses
+for the former equality:
 
 \begin{description}[style=nextline]
 \item[H-O6-1 (Scalar observable)]
 $\Rn$ is a single real-valued function of the cascade rank~$n$,
 independent of any internal representation label.
 \item[H-O6-2 (Power-law decay)]
-$\Rn \sim p(n)^{-\alpha}$ for a single exponent~$\alpha$ over the
-pre-saturation window.
-\item[H-O6-3 (Direct coupling)]
-$\Rn$ enters the growth equation multiplicatively:
-the rate of valence increase is proportional to~$\Rn$.
+$\Rn\sim p(n)^{-\alpha}$ for a single exponent~$\alpha$.
+\item[H-O6-3 (Effective growth bound)]
+The separately assumed inequality \eqref{eq:growth} bounds the productive rate above by
+$\Rn c_{\mathrm{BI}}\sqrt p$; it does not assert proportionality or saturation.
 \end{description}
 
-Hypothesis H-O6-1 is the central point of failure.
+The observable-class comparison concerns H-O6-1 independently of the failed equality.
 In the proxy setting (O7--O11), the capacity $C_n^{\mathrm{proxy}}$
 is defined via a Fourier-character proxy that abelianises the
 representation structure~\cite{Beau2026a11}.
@@ -297,19 +292,13 @@ a hidden dependence on the block structure through the averaging.
 \subsection{Step C: O7 reinterpretation}
 \label{sec:stepC}
 
-O7~\cite{Beau2026a11} recasts the O6 formula in capacity language.
-The identification $\alpha = \delta$ (O7, Section~5.1) holds in the
-reduced filling model where $p(n) = n$.
-The state law $R_n^{(k)} \approx \Phi(\eta_n)$ with
-$\Phi(\eta) = 1/\sqrt{1 + \eta^2}$ is derived exactly in the reduced
-model and is a property of the scalar capacity.
-
-O7 does not introduce new deductive content for the $\delta \to \bstar$
-relation.
-It inherits H-O6-1 from O6 without modification.
-The Remark~5.2 of O7 states this explicitly:
-the formula ``does not introduce a new derivation of~$\beta$:
-it recasts the O6 target in capacity language without circularity.''
+O7~\cite{Beau2026a11} recasts O6's conditional bound in capacity language.
+Its reduced filling model uses $p(n)=n$ to compare the exponent coordinates $\alpha$ and $\delta$;
+this coordinate comparison is not a growth-carrier identification for the exact Heisenberg pipeline.
+The state law $R_n^{(k)}\approx\Phi(\eta_n)$ remains a separate reduced-model result.
+O7 supplies no lower growth bound and no equality for $\bstar$.
+In particular, it explicitly states that $[7.4,10.6]$ is neither a necessary nor a sufficient
+condition for $\beta\in(0.09,0.13)$.
 
 \subsection{Summary of audit}
 \label{sec:auditsummary}
@@ -317,8 +306,8 @@ it recasts the O6 target in capacity language without circularity.''
 \begin{table}[ht]
 \centering
 \caption{Audit of the derivation chain.
-The column ``Exact status'' indicates whether the hypothesis
-holds for the exact Weil-block observable.}
+The column ``Exact status'' concerns the observable comparison, not the validity of a reciprocal equality.
+The effective growth bound is an independent premise even on the proxy side.}
 \label{tab:audit}
 \begin{tabular}{llcc}
 \toprule
@@ -328,7 +317,7 @@ O3 & H-O3-1 (power-law growth) & valid & valid \\
 O3 & H-O3-2 (mass $\propto 1/n_{\mathrm{exit}}$) & valid & valid \\
 O6 & H-O6-1 (scalar observable) & valid & \textbf{fails} \\
 O6 & H-O6-2 (power-law decay) & valid & valid \\
-O6 & H-O6-3 (direct coupling) & valid & open \\
+O6 & H-O6-3 (effective bound) & assumed & open \\
 O7 & inherits H-O6-1 & valid & \textbf{fails} \\
 \bottomrule
 \end{tabular}
@@ -822,7 +811,7 @@ $\deff = \dexact - (D - 1) + \log q / \log n^{*}$,
 and inserted into
 \begin{equation}
 \label{eq:C1}
-\bstar = \frac{1}{\deff + \tfrac{1}{2}},
+\beta_{\mathrm{C1}}^{\mathrm{diag}} := \frac{1}{\deff + \tfrac{1}{2}},
 \end{equation}
 This is a phenomenological diagnostic, not a consequence of the exact growth identity.
 The $(D-1)$ term belongs additively to the native increment law, while the fixed-$q$
@@ -833,19 +822,19 @@ growth exponent), $(D-1) = 3$, and
 $\log q / \log n^{*} \approx 1$ at $n^{*} \sim q$,
 one obtains $\deff \approx \dexact - 3 + 1 = \dexact - 2$.
 With $\dexact \in [3.6, 4.8]$, this gives
-$\deff \in [1.6, 2.8]$, yielding $\bstar \in [0.30, 0.48]$.
+$\deff \in [1.6, 2.8]$, yielding $\beta_{\mathrm{C1}}^{\mathrm{diag}} \in [0.30, 0.48]$.
 This is still above the target $(0.09, 0.13)$.
 
 \item[Diagnostic C2: additional denominator term]
 The second historical diagnostic appends a $q$-dependent term:
 \begin{equation}
 \label{eq:C2}
-\bstar = \frac{1}{\deff + \tfrac{1}{2} + \sigma(q)},
+\beta_{\mathrm{C2}}^{\mathrm{diag}} := \frac{1}{\deff + \tfrac{1}{2} + \sigma(q)},
 \end{equation}
 where $\sigma(q)$ quantifies the displacement required to reach a chosen target.
 No Heisenberg growth process carrying this term is derived.
 
-For C2 to produce $\bstar \in (0.09, 0.13)$ with
+For C2 to place its diagnostic in $(0.09,0.13)$ with
 $\deff \in [1.6, 2.8]$, the correction must satisfy
 $\sigma(q) \in [4.39, 9.01]$, which would require
 $\sigma(q) \sim q^{\kappa}$ for some $\kappa > 0$.
@@ -1032,12 +1021,12 @@ phenomenological unless a native carrier is constructed.
 \section{Conclusion}
 \label{sec:conclusion}
 
-The O3--O7 derivation chain that produces
-$\bstar = 1/(\delta + 1/2)$ is conditional in its domain:
-a scalar global capacity on proxy-level LPS dynamics.
-The failure is not an error but a scope limitation:
-the scalar-observable hypothesis H-O6-1 does not hold for the
-exact Weil-block capacity measured in O12--O14.
+O6's effective growth hypothesis and power-law Ansatz yield an upper bound only.
+The former equality $\bstar=1/(\delta+1/2)$ is not a valid consequence even in its scalar domain;
+the countermodel in Section~\ref{sec:central} refutes that implication.
+The interval $[7.4,10.6]$ is a historical diagnostic range, not a condition selecting $\bstar$.
+The separate observable-class mismatch remains: the exact block capacity does not supply the
+scalar redundancy or a native growth carrier.
 
 The non-equivalence theorem (Proposition~\ref{prop:noneq})
 establishes that the block-averaged exponent $\dexact$ does not
