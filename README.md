@@ -98,7 +98,7 @@ The result is:
 
 - **O3 remains valid**
 - **O6 supplies a conditional upper bound in its scalar domain, with equality refuted under those premises**
-- the failure is localised at the point where a **scalar global observable**
+- an additional mismatch occurs where a **scalar global observable**
   is implicitly substituted by a **mean over exact Weil blocks**
 
 The former equality contains a mathematical implication error already in the scalar setting.
