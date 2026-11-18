@@ -47,8 +47,10 @@ It shows that the mismatch is **not** due to:
 - central-phase bias
 - or an insufficiently refined statistical aggregation of blocks
 
-Instead, the failure occurs at the level of the **growth equation itself**:
-the scalar observable entering the O6/O7 derivation is **not equivalent**
+There are two distinct failures.
+The reciprocal equality does not follow even in O6’s scalar setting: its premises give only an upper bound
+and admit a counterexample to equality.
+Separately, the scalar observable entering the O6 growth equation is **not equivalent**
 to the exact Weil-block observable measured in O12–O14.
 
 ---
@@ -71,7 +73,9 @@ Thus the O7 chain
 $\bar\Sigma_n \sim n^{-\delta}
 \quad \Longrightarrow \quad
 \beta^* = \frac{1}{\delta + \tfrac12}$
-fails in the exact Weil regime.
+is withdrawn as a derived implication already in the scalar setting.
+Its use in the exact Weil regime encounters the additional observable and growth-carrier mismatch;
+that transfer obstruction is separate from the failed scalar implication.
 
 The native Heisenberg statement is instead
 
